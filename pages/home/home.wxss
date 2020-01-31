@@ -137,20 +137,32 @@ page{
 }
 
 .other {
-  padding: 3rpx;
-  display: -webkit-box;
+  padding: 10rpx;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  background: white;
+  border-top: 1px solid rgb(247, 245, 245);
+
   text-align: center;
   align-items: center;
-  height: 50rpx;
+    /* float: left; */
+
 }
 
-
-
 .other image {
-  width: 50rpx;
-  height: 50rpx;
+  width: 40rpx;
+  height: 40rpx;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.icontext {
+  font-size: 20rpx;
+  padding-left: 10rpx;
+  /* font-weight: bold; */
+  float: right;
+  line-height: 40rpx;
 }
 
 .head-title {
@@ -183,8 +195,8 @@ page{
 
 .arow {
   display: flex;
-  justify-content: space-between;
-  /* align-items: center; */
+  /* justify-content: space-between; */
+  align-items: center;
 }
 
 .artist-name {
