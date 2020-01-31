@@ -1,10 +1,115 @@
-/* 首页导航 */
-page{
-  color: #666;
-  /* padding: 10rpx; */
+.box {
+  background: white;
+  margin-bottom: 15rpx;
+}
+
+.my-name {
+  width: 100%;
+  height: 230rpx;
+  background: white;
+}
+
+.my-name image {
+  display: block;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 10px;
+  margin: 40rpx;
+  float: left;
+}
+
+.my-name .Username {
+  font-size: 40rpx;
+  /* margin-top: 10rpx; */
+  font-weight: bold;
+  float: left;
+  line-height: 143rpx;
+}
+
+.my-row {
+  line-height: 110rpx;
+  font-size: 30rpx;
+  background-color: white;
+  border-top: 1px solid rgb(247, 245, 245);
+}
+
+.my-row .image_right {
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  float: right;
+  padding: 30rpx;
+}
+
+.my-row .image_left {
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  float: left;
+  padding: 30rpx;
+}
+
+.other {
+  padding: 10rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: white;
+  border-top: 1px solid rgb(247, 245, 245);
+  text-align: center;
+  align-items: center;
+}
+
+.other image {
+  width: 50rpx;
+  height: 50rpx;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.icontext {
+  font-size: 23rpx;
+  display: block;
+}
+
+.contact-btn {
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  background: salmon;
+  opacity: 0;
 }
 
 
+button {
+  margin: 10px;
+
+  }
+
+
+  .header {
+    margin: 90rpx 0 90rpx 50rpx;
+    text-align: center;
+    width: 650rpx;
+    height: 300rpx;
+    line-height: 450rpx;
+}
+
+.header image {
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.content {
+    margin-left: 50rpx;
+    margin-bottom: 90rpx;
+}
+
+.content text {
+    display: block;
+    color: #9d9d9d;
+    margin-top: 40rpx;
+}
 
 /* 顶部菜单切换 */
 
@@ -93,7 +198,6 @@ page{
 .video_wrap{
  display: flex;
  flex-wrap: wrap;
- /* padding: 5rpx; */
  justify-content: space-between;
 }
 .video_item{
@@ -199,5 +303,3 @@ page{
   font-size: 25rpx;
   color: #999;
 }
-
-

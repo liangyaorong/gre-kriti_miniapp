@@ -2,15 +2,31 @@ const app = getApp()
 
 Page({
   data: {
-    aboutUsTitle: '',
-    aboutUsContent: '',
-    servicePhoneNumber: '',
-    balance: 0,
-    freeze: 0,
-    score: 0,
-    score_sign_continuous: 0,
-    iconSize: 45,
-    iconColor: '#999999'
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    nickName: "",
+    avatarUrl: ""
+
+  },
+
+  onLoad: function () {
+    var _this = this
+    // 查看是否授权
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: function (res) {
+              _this.setData({
+                nickName: res.userInfo.nickName,
+                avatarUrl: res.userInfo.avatarUrl
+              })
+              console.log(res.userInfo.nickName)
+            }
+          })
+        }
+      }
+    })
   },
   onPullDownRefresh: function () {
     var that = this

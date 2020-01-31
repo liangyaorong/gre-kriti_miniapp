@@ -64,11 +64,13 @@ Page({
   onShareAppMessage: function () {
   
   },
+
   rejectLogin: function (e){
     wx.navigateBack({
       
     })
   },
+
   bindGetUserInfo: function (e) {
     if (!e.detail.userInfo){
       return;
@@ -76,6 +78,7 @@ Page({
     wx.setStorageSync('userInfo', e.detail.userInfo)
     this.login();
   },
+  
   login: function () {
     let that = this;
     let token = wx.getStorageSync('token');

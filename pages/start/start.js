@@ -12,13 +12,13 @@ Page({
     });
   },
   onLoad:function(){
-    var that = this
-    that.setData({
-      background_color: app.globalData.globalBGColor,
-      bgRed: app.globalData.bgRed,
-      bgGreen: app.globalData.bgGreen,
-      bgBlue: app.globalData.bgBlue
-    })
+    // var that = this
+    // that.setData({
+    //   background_color: 'black',
+    //   bgRed: app.globalData.bgRed,
+    //   bgGreen: app.globalData.bgGreen,
+    //   bgBlue: app.globalData.bgBlue
+    // })
   },
   onShow:function(){
 

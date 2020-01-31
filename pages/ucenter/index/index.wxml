@@ -116,6 +116,8 @@
   <view style="height:20rpx;width:100%;"></view>
   <view class="my-item" style='border:none;padding:0rpx;margin:0rpx;background:none;border:none;height:auto;line-height:auto;'>
     <wxc-button type="danger" value="重新授权登录" bindclick="relogin"></wxc-button>
+
+    <button open-type="getUserInfo"/>
   </view>
 
   <view class="version" style='margin-top:10rpx;font-size:18rpx;'>Copyright © 2017-2018 qindiandadudu(GitHub ID)</view>

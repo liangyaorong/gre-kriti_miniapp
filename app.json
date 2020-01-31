@@ -2,24 +2,14 @@
   "pages": [
     "pages/start/start",
     "pages/home/home",
-    "pages/classification/index",
-    "pages/choiceness/index",
-    "pages/finder/index",
+    "pages/video-detail/video-detail",
+          "pages/my/my",
+          
     "pages/ucenter/index/index",
-    "pages/search/index",
-    "pages/goods-details/index",
-    "pages/shop-cart/index",
-    "pages/to-pay-order/index",
-    "pages/select-address/index",
-    "pages/address-add/index",
     "pages/ucenter/order-list/index",
     "pages/upload/upload",
-    "pages/wuliu/index",
     "pages/ucenter/mycoupons/index",
-    "pages/notice/show",
     "pages/recharge/index",
-    "pages/withdraw/index",
-    "pages/kanjia/index",
     "pages/authorize/index",
     "pages/ucenter/feedback/feedback",
     "pages/ucenter/location/location"
@@ -50,7 +40,7 @@
         "text": "上传"
       },
       {
-        "pagePath": "pages/ucenter/index/index",
+        "pagePath": "pages/my/my",
         "iconPath": "images/nav/my-off.png",
         "selectedIconPath": "images/nav/my-on.png",
         "text": "我的"
