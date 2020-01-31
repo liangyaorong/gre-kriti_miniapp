@@ -1,0 +1,44 @@
+<!--导航条-->
+<view class="navbar">
+  <lable wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">
+    <text>{{item}}</text>
+  </lable>
+</view>
+
+<!--全部-->
+<view hidden="{{currentTab!='0'}}" class='total'>
+  <!--pages/uploadVid/uploadVid.wxml-->
+
+  <textarea maxlength='50' bindblur='post_desc' name='post_desc' placeholder='随时分享新鲜事'></textarea>
+  <view class='share-vids'>
+    <view class='add-btn' wx:if="{{upFilesBtn}}" data-type="video" bindtap='uploadFiles'></view>
+    <view class='videos'>
+      <block wx:for="{{upVideoArr}}" wx:for-item="v" wx:key="k">
+        <view class='vid'>
+          <video class='video' src="{{v.tempFilePath}}" controls='{{controls}}' poster='{{v.thumbTempFilePath}}'></video>
+        </view>
+        <view class='delbtn' data-index="{{index}}" data-type="video" bindtap='delFile'>删除</view>
+      </block>
+    </view>
+
+  </view>
+  <button class='upload_btn'>发表</button>
+
+</view>
+
+<!--待付款-->
+<view hidden="{{currentTab!='1'}}">
+   <textarea maxlength='50' bindblur='post_desc' name='post_desc' placeholder='随时分享新鲜事'></textarea>
+  <view class='share-pics'>
+    <view class='slug-cons'>
+      <view class='pics'>
+        <view class='tp' wx:for="{{upImgArr}}" wx:key="item">
+          <image mode='aspectFill' class='img' src='{{item.path}}' data-presrc="{{item.path}}" bindtap='previewImg' />
+          <view class='delbtn' data-index="{{index}}" data-type="image" bindtap='delFile'>X</view>
+        </view>
+      </view>
+      <view class='btn' wx:if="{{upFilesBtn}}" data-type="image" bindtap='uploadFiles'></view>
+    </view>
+  </view>
+  <button class='upload_btn'>发表</button>
+</view>
