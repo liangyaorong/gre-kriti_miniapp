@@ -7,7 +7,6 @@ var upFiles = require('../../utils/upFiles.js');
 
 Page({
 
-
   /**
    * 页面的初始数据
    */
@@ -47,6 +46,7 @@ Page({
     }
 
   },
+
 
   // 删除上传图片 或者视频
   delFile(e) {
@@ -93,6 +93,18 @@ Page({
     })
   },
 
+
+  uploadFiles(e) {
+    let that = this;
+    upFiles.upFilesFun(
+      that, 
+      uploadUrl, 
+      filesPath, 
+      formatData
+    )
+  },
+
+
   // 初始化加载
   onLoad: function (options) {
     this.setData({
@@ -107,11 +119,5 @@ Page({
       currentTab: e.currentTarget.dataset.idx
     })
   },
-
-
-
-
-
-
 
 })

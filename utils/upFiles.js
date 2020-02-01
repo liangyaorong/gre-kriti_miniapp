@@ -110,14 +110,13 @@ var getPathArr = t => {
  * success：上传完成之后
  */
 
-var upFilesFun = (t, uploadUrl, filesPath, formatData, progress, success) => {
+var upFilesFun = (t, uploadUrl, filesPath, formatData) => {
   let _this = t;
-  let startIndex = 0;
-  let successNumber = 0;
-  let failNumber = 0;
+  var startIndex = 0;
+  var successNumber = 0;
+  var failNumber = 0;
 
   if (filesPath.length == 0) {
-    success([]);
     return;
   }
   const uploadTask = wx.uploadFile({
@@ -157,7 +156,6 @@ var upFilesFun = (t, uploadUrl, filesPath, formatData, progress, success) => {
         // console.log('completeNumber', startIndex)
         // console.log('over',res)
         let sucPathArr = t.data.uploadedPathArr;
-        success(sucPathArr);
         t.setData({
           uploadedPathArr: []
         })
@@ -165,10 +163,7 @@ var upFilesFun = (t, uploadUrl, filesPath, formatData, progress, success) => {
       } else {
         startIndex++;
         // console.log(startIndex)
-        data.startIndex = startIndex;
-        data.successNumber = successNumber;
-        data.failNumber = failNumber;
-        upFilesFun(t, uploadUrl, filesPath, formatData, progress, success);
+        upFilesFun(t, uploadUrl, filesPath, formatData);
       }
     }
   })
@@ -176,9 +171,9 @@ var upFilesFun = (t, uploadUrl, filesPath, formatData, progress, success) => {
   uploadTask.onProgressUpdate((res) => {
     res['index'] = startIndex;
     // console.log(typeof (progress));
-    if (typeof(progress) == 'function') {
-      progress(res);
-    }
+    // if (typeof(progress) == 'function') {
+    //   progress(res);
+    // }
     console.log('上传进度', res.progress)
     console.log('已经上传的数据长度', res.totalBytesSent)
     console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
