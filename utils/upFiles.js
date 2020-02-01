@@ -15,7 +15,7 @@ var chooseImage = (t, count) => {
         // 超出部分截断
         var newImgArr = imgArr
         if (imgArr.length > count) {
-          newImgArr = imgArr.slice(0, count - 1)
+          newImgArr = imgArr.slice(0, count)
         }
         t.setData({
           upImageFilesBtn: false,
