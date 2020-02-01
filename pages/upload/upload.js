@@ -21,6 +21,7 @@ Page({
     //上传视频模块
     upVideoArr: [], //存视频
     maxVideoUploadLen: 1,  //限制上传数量
+    upVideoPathLen: 0,
 
     //上传图片
     upImgArr: [], //存图片
@@ -62,7 +63,9 @@ Page({
           if (delType == 'image') {
             upImgArr.splice(delNum, 1)
             that.setData({
-              upImgArr: upImgArr
+              upImgArr: upImgArr,
+              upImagePathLen: upImgArr.length
+
             })
             if (upImgArr.length < that.data.maxImageUploadLen) {
               that.setData({
@@ -72,7 +75,9 @@ Page({
           } else if (delType == 'video') {
             upVideoArr.splice(delNum, 1)
             that.setData({
-              upVideoArr: upVideoArr
+              upVideoArr: upVideoArr,
+              upVideoPathLen: upVideoArr.length
+
             })
             if (upVideoArr.length < that.data.maxVideoUploadLen) {
               that.setData({

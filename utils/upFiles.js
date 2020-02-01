@@ -27,7 +27,6 @@ var chooseImage = (t, count) => {
         t.setData({
           upImgArr: imgArr,
           upImagePathLen: imgArr.length
-
         })
       }
 
@@ -61,12 +60,16 @@ var chooseVideo = (t, count) => {
         }
         t.setData({
           upVideoFilesBtn: false,
-          upVideoArr: newVideoArr
+          upVideoArr: newVideoArr,
+          upVideoPathLen: newVideoArr.length
+
         })
 
       } else {
         t.setData({
-          upVideoArr: videoArr
+          upVideoArr: videoArr,
+          upVideoPathLen: videoArr.length
+
         })
       }
       console.log("当前视频路径列表：", videoArr)
