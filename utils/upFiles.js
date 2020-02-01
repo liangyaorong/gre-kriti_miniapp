@@ -6,24 +6,33 @@ var chooseImage = (t, count) => {
     success: (res) => {
       var imgArr = t.data.upImgArr || [];
       let arr = res.tempFiles;
-      // console.log(res)
-      arr.map(function (v, i) {
+      arr.map(function(v, i) {
         v['progress'] = 0;
         imgArr.push(v)
       })
-      t.setData({
-        upImgArr: imgArr
-      })
 
-      let upFilesArr = getPathArr(t);
-      if (upFilesArr.length > count - 1) {
-        let imgArr = t.data.upImgArr;
-        let newimgArr = imgArr.slice(0, count)
+      if (imgArr.length >= count) {
+        // 超出部分截断
+        var newImgArr = imgArr
+        if (imgArr.length > count) {
+          newImgArr = imgArr.slice(0, count - 1)
+        }
         t.setData({
-          upFilesBtn: false,
-          upImgArr: newimgArr
+          upImageFilesBtn: false,
+          upImgArr: newImgArr,
+          upImagePathLen: newImgArr.length
+        })
+
+      } else {
+        t.setData({
+          upImgArr: imgArr,
+          upImagePathLen: imgArr.length
+
         })
       }
+
+      console.log("当前图片路径列表：", imgArr)
+
     },
   });
 }
@@ -33,7 +42,7 @@ var chooseVideo = (t, count) => {
     maxDuration: 30,
     compressed: true,
     camera: 'back',
-    success: function (res) {
+    success: function(res) {
       let videoArr = t.data.upVideoArr || [];
       let videoInfo = {};
       videoInfo['tempFilePath'] = res.tempFilePath;
@@ -43,16 +52,25 @@ var chooseVideo = (t, count) => {
       videoInfo['thumbTempFilePath'] = res.thumbTempFilePath;
       videoInfo['progress'] = 0;
       videoArr.push(videoInfo)
-      t.setData({
-        upVideoArr: videoArr
-      })
-      let upFilesArr = getPathArr(t);
-      if (upFilesArr.length > count - 1) {
+
+      if (videoArr.length >= count) {
+        // 超出部分截断
+        var newVideoArr = videoArr
+        if (videoArr.length > count) {
+          newVideoArr = videoArr.slice(0, count - 1)
+        }
         t.setData({
-          upFilesBtn: false,
+          upVideoFilesBtn: false,
+          upVideoArr: newVideoArr
+        })
+
+      } else {
+        t.setData({
+          upVideoArr: videoArr
         })
       }
-      // console.log(res)
+      console.log("当前视频路径列表：", videoArr)
+
     }
   })
 }
@@ -63,10 +81,10 @@ var getPathArr = t => {
   let upVideoArr = t.data.upVideoArr || [];
   let imgPathArr = [];
   let videoPathArr = [];
-  imgarr.map(function (v, i) {
+  imgarr.map(function(v, i) {
     imgPathArr.push(v.path)
   })
-  upVideoArr.map(function (v, i) {
+  upVideoArr.map(function(v, i) {
     videoPathArr.push(v.tempFilePath)
   })
   let filesPathsArr = imgPathArr.concat(videoPathArr);
@@ -89,25 +107,23 @@ var getPathArr = t => {
  * success：上传完成之后
  */
 
-var upFilesFun = (t, data, progress, success) => {
+var upFilesFun = (t, uploadUrl, filesPath, formatData, progress, success) => {
   let _this = t;
-  let url = data.url;
-  let filesPath = data.filesPathsArr ? data.filesPathsArr : getPathArr(t);
-  let name = data.name || 'file';
-  let formData = data.formData || {};
-  let startIndex = data.startIndex ? data.startIndex : 0;
-  let successNumber = data.successNumber ? data.successNumber : 0;
-  let failNumber = data.failNumber ? data.failNumber : 0;
+  let startIndex = 0;
+  let successNumber = 0;
+  let failNumber = 0;
+
   if (filesPath.length == 0) {
     success([]);
     return;
   }
   const uploadTask = wx.uploadFile({
-    url: url,
+    url: uploadUrl,
     filePath: filesPath[startIndex],
-    name: name,
+    name: 'file',
     formData: formData,
-    success: function (res) {
+
+    success: function(res) {
       var data = res.data
       successNumber++;
       // console.log('success', successNumber)
@@ -125,14 +141,14 @@ var upFilesFun = (t, data, progress, success) => {
         })
       }
     },
-    fail: function (res) {
+    fail: function(res) {
       failNumber++;
       // console.log('fail', filesPath[startIndex])
       // console.log('failstartIndex',startIndex)
       // console.log('fail', failNumber)
       // console.log('fail', res)
     },
-    complete: function (res) {
+    complete: function(res) {
 
       if (startIndex == filesPath.length - 1) {
         // console.log('completeNumber', startIndex)
@@ -149,7 +165,7 @@ var upFilesFun = (t, data, progress, success) => {
         data.startIndex = startIndex;
         data.successNumber = successNumber;
         data.failNumber = failNumber;
-        upFilesFun(t, data, progress, success);
+        upFilesFun(t, uploadUrl, filesPath, formatData, progress, success);
       }
     }
   })
@@ -157,13 +173,18 @@ var upFilesFun = (t, data, progress, success) => {
   uploadTask.onProgressUpdate((res) => {
     res['index'] = startIndex;
     // console.log(typeof (progress));
-    if (typeof (progress) == 'function') {
+    if (typeof(progress) == 'function') {
       progress(res);
     }
-    // console.log('上传进度', res.progress)
-    // console.log('已经上传的数据长度', res.totalBytesSent)
-    // console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+    console.log('上传进度', res.progress)
+    console.log('已经上传的数据长度', res.totalBytesSent)
+    console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
   })
 
 }
-module.exports = { chooseImage, chooseVideo, upFilesFun, getPathArr }
+module.exports = {
+  chooseImage,
+  chooseVideo,
+  upFilesFun,
+  getPathArr
+}

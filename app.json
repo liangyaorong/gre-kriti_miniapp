@@ -3,16 +3,8 @@
     "pages/start/start",
     "pages/home/home",
     "pages/video-detail/video-detail",
-          "pages/my/my",
-          
-    "pages/ucenter/index/index",
-    "pages/ucenter/order-list/index",
-    "pages/upload/upload",
-    "pages/ucenter/mycoupons/index",
-    "pages/recharge/index",
-    "pages/authorize/index",
-    "pages/ucenter/feedback/feedback",
-    "pages/ucenter/location/location"
+    "pages/my/my",
+    "pages/upload/upload"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -25,7 +17,6 @@
     "color": "#b2b2b2",
     "selectedColor": "#b2b2b2",
     "borderStyle": "black",
-
     "list": [
       {
         "pagePath": "pages/home/home",

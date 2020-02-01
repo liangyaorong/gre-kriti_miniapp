@@ -6,7 +6,7 @@ var upFiles = require('../../utils/upFiles.js');
 
 
 Page({
-  
+
 
   /**
    * 页面的初始数据
@@ -20,26 +20,31 @@ Page({
 
     //上传视频模块
     upVideoArr: [], //存视频
-    upFilesBtn: true,
-    maxUploadLen: 1,  //限制上传数量
+    maxVideoUploadLen: 1,  //限制上传数量
 
     //上传图片
     upImgArr: [], //存图片
-    upFilesBtn: true,
-    maxUploadLen: 9,  //限制上传数量
+    maxImageUploadLen: 9,  //限制上传数量
+    upImagePathLen: 0,
+
+    // 控制是否显示上传按钮
+    upVideoFilesBtn: true,
+    upImageFilesBtn: true,
+
   },
 
 
   // 选择图片或者视频
-  uploadFiles(e) {
+  chooseFiles(e) {
     var that = this,
       type = e.currentTarget.dataset.type,
       maxUploadLen = that.data.maxUploadLen;
     if (type == 'image') {
-      upFiles.chooseImage(that, maxUploadLen);
+      upFiles.chooseImage(that, that.data.maxImageUploadLen);
     } else if (type == 'video') {
-      upFiles.chooseVideo(that, maxUploadLen);
+      upFiles.chooseVideo(that, that.data.maxVideoUploadLen);
     }
+
   },
 
   // 删除上传图片 或者视频
@@ -59,18 +64,22 @@ Page({
             that.setData({
               upImgArr: upImgArr
             })
+            if (upImgArr.length < that.data.maxImageUploadLen) {
+              that.setData({
+                upImageFilesBtn: true,
+              })
+            }
           } else if (delType == 'video') {
             upVideoArr.splice(delNum, 1)
             that.setData({
               upVideoArr: upVideoArr
             })
-          }
+            if (upVideoArr.length < that.data.maxVideoUploadLen) {
+              that.setData({
+                upVideoFilesBtn: true,
+              })
+            }
 
-          let upFilesArr = upFiles.getPathArr(that);
-          if (upFilesArr.length < that.data.maxUploadLen) {
-            that.setData({
-              upFilesBtn: true,
-            })
           }
         } else if (res.cancel) {
           console.log('用户点击取消')
@@ -80,7 +89,7 @@ Page({
   },
 
   // 初始化加载
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
       currentTab: options.index
     })
@@ -88,13 +97,15 @@ Page({
 
 
   //顶部tab切换
-  navbarTap: function(e) {
-    console.log("data")
-    console.log(e)
+  navbarTap: function (e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
   },
+
+
+
+
 
 
 

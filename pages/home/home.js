@@ -116,25 +116,29 @@ Page({
     currentIndexNav: '0',
     //首页导航数据
     navList: ['全部', '现场', '花絮', '幕后', '精彩', '模特'],
-    //轮播图数据
-    swiperList: [],
+    //头图数据
+    headerImageUrl:'',
     //视频列表数据
     videosList: [],
     imagesList: [],
   },
 
   // 获取轮播图数据
-  getSwiperList() {
+  getHeaderImageUrl() {
     let that = this;
-    wx.request({
-      url: 'https://easy-mock.com/mock/5c1dfd98e8bfa547414a5278/bili/swiperList',
-      success(res) {
-        // console.log(res);
-        that.setData({
-          swiperList: res.data.data.swiperList
+    // wx.request({
+    //   url: 'https://easy-mock.com/mock/5c1dfd98e8bfa547414a5278/bili/swiperList',
+    //   success(res) {
+    //     // console.log(res);
+    //     that.setData({
+    //       swiperList: res.data.data.swiperList
+    //     })
+    //   }
+    // })
+    that.setData({
+      headerImageUrl: 'https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=109e35ebacec08fa320d1bf538875608/95eef01f3a292df507633d41b0315c6035a873c6.jpg'
         })
-      }
-    })
+
   },
 
   // 获取视频列表数据
@@ -218,14 +222,14 @@ Page({
    */
   onLoad: function(options) {
     // 2.获取轮播图数据
-    this.getSwiperList();
+    this.getHeaderImageUrl();
     this.getVideosList();
     this.getImagesList();
     console.log(this.data)
 
 
     wx.request({
-      url: "http://www.jerrymomo10.xyz/itemsearch?",
+      url: "http://www.jerrymomo10.xyz:443/itemsearch?",
       data: {
         "id": "2",
       },
