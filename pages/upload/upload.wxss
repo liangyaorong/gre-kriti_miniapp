@@ -1,35 +1,24 @@
 /* 顶部菜单切换 */
 
 .navbar {
-  display: flex;
-  background: #fff;
-}
-
-.none_tab {
-  position: relative;
-  top: 20rpx;
-  color: #999;
-  font-size: 32rpx;
+  /* display: flex; */
+  height: 70rpx;
 }
 
 /* 默认选中菜单 */
 
 .navbar .item {
-  position: relative;
-  flex: auto;
+  margin: 0 35rpx 0 35rpx;
   font-size: 27rpx;
-  width: 100rpx;
   text-align: center;
-  line-height: 80rpx;
-  color: #333;
-  border-bottom: 6rpx solid #ddd;
+  display: inline-block;
 }
 
 /* 选中菜单样式 */
 
 .navbar .item.active {
-  color: #333;
-  border-bottom: 6rpx solid #000;
+  border-bottom: 6rpx solid grey;
+  font-size: 35rpx;
 }
 
 /* 字体 */
@@ -42,7 +31,9 @@
   left: 0;
   right: 0;
   height: 4rpx;
+  width: 3rpx;
 }
+
 
 /* 全部 */
 

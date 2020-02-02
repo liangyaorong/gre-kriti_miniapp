@@ -19,8 +19,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.6.6",
-	"appid": "wx9c887a0d953e933b",
-	"projectname": "tgg",
+	"appid": "wx18e21e713bbcc342",
+	"projectname": "grekriti",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -54,37 +54,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
-					"name": "精选",
-					"pathName": "pages/choiceness/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "发现",
-					"pathName": "pages/finder/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "分类",
-					"pathName": "pages/classification/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "我的",
-					"pathName": "pages/ucenter/index/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "购物车",
-					"pathName": "pages/shop-cart/index",
-					"query": ""
+					"name": "pages/home/home",
+					"pathName": "pages/home/home",
+					"scene": null
 				}
 			]
 		}
