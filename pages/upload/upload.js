@@ -4,7 +4,6 @@ var util = require('../../utils/util.js');
 var upFiles = require('../../utils/upFiles.js');
 
 
-
 Page({
 
   /**

@@ -63,8 +63,8 @@ page {
 }
 
 .nav_wrap_text image {
-  width: 15rpx;
-  height: 15rpx;
+  width: 20rpx;
+  height: 20rpx;
   margin-left: 10rpx;
 }
 

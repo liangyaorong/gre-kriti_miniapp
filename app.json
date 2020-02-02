@@ -20,20 +20,20 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "iconPath": "images/nav/select-off.png",
-        "selectedIconPath": "images/nav/select-on.png",
+        "iconPath": "images/home-o.png",
+        "selectedIconPath": "images/home.png",
         "text": "首页"
       },
       {
         "pagePath": "pages/upload/upload",
-        "iconPath": "images/nav/find-off.png",
-        "selectedIconPath": "images/nav/find-on.png",
+        "iconPath": "images/add-o.png",
+        "selectedIconPath": "images/add.png",
         "text": "上传"
       },
       {
         "pagePath": "pages/my/my",
-        "iconPath": "images/nav/my-off.png",
-        "selectedIconPath": "images/nav/my-on.png",
+        "iconPath": "images/contact-o.png",
+        "selectedIconPath": "images/contact.png",
         "text": "我的"
       }
     ]

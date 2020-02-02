@@ -1,5 +1,7 @@
 var images = require("../../data/Post_data.js")
 var videos = require("../../data/Video_data.js")
+const APP_ID = 'wx18e21e713bbcc342';//输入小程序appid  
+const APP_SECRET = '26c587ff952331daac5480ee61572df9';//输入小程序
 
 
 Page({
@@ -41,12 +43,42 @@ Page({
     // console.log(e.detail.rawData)
   },
 
+  getOpenId: function () {
+    var that = this;
+    wx.login({
+      success: function (res) {
+
+        // 改成服务器调接口
+        wx.request({
+          //获取openid接口  
+          url: 'https://api.weixin.qq.com/sns/jscode2session',
+          data: {
+            appid: 'wx18e21e713bbcc342',
+            secret: '26c587ff952331daac5480ee61572df9',
+            js_code: res.code,
+            grant_type: 'authorization_code'
+          },
+          method: 'GET',
+          success: function (res) {
+            that.setData({
+              openid: res.data.openid,
+              session_key: res.data.session_key
+            })
+            console.log(that.data)
+          }
+        })
+      }
+    })
+  },
+
   onLoad: function() {
     // 2.获取轮播图数据
     this.getSwiperList();
     this.getVideosList();
     this.getImagesList();
+    this.getOpenId();
     console.log(this.data)
+
   },
   
 
@@ -133,6 +165,11 @@ Page({
       complete: function (res) { },
     })
   },
+
+
+
+
+  
 
 
   /**
