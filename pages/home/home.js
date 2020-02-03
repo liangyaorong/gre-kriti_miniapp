@@ -227,23 +227,6 @@ Page({
     this.getImagesList();
     console.log(this.data)
 
-
-    wx.request({
-      url: "http://www.jerrymomo10.xyz:443/itemsearch?",
-      data: {
-        "id": "2",
-      },
-      method: 'GET',
-      header: {},
-      success: function(res) {
-        console.log(res)
-        // _this.setData({
-        //   "posts": res.data.posts,
-        //   "page": 0
-        // })
-      }
-    })
-
   },
 
   /**

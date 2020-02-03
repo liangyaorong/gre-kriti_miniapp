@@ -32,6 +32,39 @@ Page({
 
   },
 
+  bindFormSubmitPics: function (e) {
+    let that = this;
+    console.log('图片路径', that.data.upImgArr[0].path)
+    console.log('文字', e.detail.value.textarea)
+
+    const uploadTask = wx.uploadFile({
+      url: 'https://videos.taouu.cn/uploadFile',
+      filePath: that.data.upImgArr[0].path,
+      name: 'file',
+      formData: {
+        'owner_id': 334,
+        'category': "花絮",
+        'type': 'video',
+        'text': e.detail.value.textarea
+      },
+
+      success: function (res) {
+        console.log('success', res)
+      },
+      fail: function (res) {
+        console.log('fail', res)
+      },
+      complete: function (res) {
+        console.log("上传完成！")
+      }
+    })
+
+    uploadTask.onProgressUpdate((res) => {
+      console.log('上传进度', res.progress)
+      console.log('已经上传的数据长度', res.totalBytesSent)
+      console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+    })
+  },
 
   // 选择图片或者视频
   chooseFiles(e) {
@@ -94,13 +127,7 @@ Page({
 
 
   uploadFiles(e) {
-    let that = this;
-    upFiles.upFilesFun(
-      that, 
-      uploadUrl, 
-      filesPath, 
-      formatData
-    )
+    
   },
 
 

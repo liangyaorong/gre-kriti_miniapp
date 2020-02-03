@@ -21,12 +21,13 @@
     </view>
   </view>
 
-   <view class='add-btn' hidden="{{!upVideoFilesBtn}}"  data-type="video" bindtap='chooseFiles'>
+  <view class='add-btn' hidden="{{!upVideoFilesBtn}}" data-type="video" bindtap='chooseFiles'>
   </view>
 
-  <textarea class='desc' maxlength='50' style="height: 5em" placeholder='描述即将发表的作品'></textarea>
-
-  <button type='primary' bindtap="uploadFiles">发表</button>
+  <form bindsubmit="bindFormSubmitPics">
+    <textarea class='desc' maxlength='50' style="height: 5em"  placeholder="描述即将发表的作品" name="textarea" />
+    <button form-type="submit" type='primary'> 发表 </button>
+  </form>
 
 </view>
 
@@ -46,7 +47,9 @@
 
   <view class='add-btn' wx:if="{{upImageFilesBtn}}" data-type="image" bindtap='chooseFiles'></view>
 
-  <textarea class='desc' maxlength='50' style="height: 5em" placeholder='描述即将发表的作品'></textarea>
+  <form bindsubmit="bindFormSubmitPics">
+    <textarea class='desc' maxlength='50' style="height: 5em"  placeholder="描述即将发表的作品" name="textarea" />
+    <button form-type="submit" type='primary'> 发表 </button>
+  </form>
 
-  <button type='primary' bindtap="uploadFiles">发表</button>
 </view>
