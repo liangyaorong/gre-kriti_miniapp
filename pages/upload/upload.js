@@ -10,20 +10,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // 顶部菜单切换
-    navbar: ['视频', '图片'],
-
     // 默认选中菜单
     currentTab: "0",
+    // 顶部菜单切换
+    navbar: ['图片', '视频'],
+
+
+    //被点击的首页导航的菜单索引
+    currentIndexNav: '0',
+    //首页导航数据
+    navList: ['默认', '现场', '花絮', '幕后', '精彩', '模特'],
 
     //上传视频模块
     upVideoArr: [], //存视频
-    maxVideoUploadLen: 1,  //限制上传数量
+    maxVideoUploadLen: 1, //限制上传数量
     upVideoPathLen: 0,
 
     //上传图片
     upImgArr: [], //存图片
-    maxImageUploadLen: 9,  //限制上传数量
+    maxImageUploadLen: 9, //限制上传数量
     upImagePathLen: 0,
 
     // 控制是否显示上传按钮
@@ -32,30 +37,96 @@ Page({
 
   },
 
-  bindFormSubmitPics: function (e) {
+  bindFormSubmitPics: function(e) {
     let that = this;
     console.log('图片路径', that.data.upImgArr[0].path)
     console.log('文字', e.detail.value.textarea)
+    console.log('标签', that.data.navList[that.data.currentIndexNav])
+    console.log('时间', util.time(new Date()))
+
+
+    wx.showLoading({
+      title: '发表中',
+    })
 
     const uploadTask = wx.uploadFile({
-      url: 'https://videos.taouu.cn/uploadFile',
+      url: 'https://videos.taouu.cn/collection/add',
       filePath: that.data.upImgArr[0].path,
       name: 'file',
       formData: {
-        'owner_id': 334,
-        'category': "花絮",
-        'type': 'video',
-        'text': e.detail.value.textarea
+        'wx_id': app.globalData.openId,
+        'type': 'picture',
+        'create_time': util.formatTime(new Date()),
+        'index': 0,
+        'post': e.detail.value.textarea,
+        'label': that.data.navList[that.data.currentIndexNav],
+        'collection_gid': app.globalData.openId + util.time(new Date())
       },
 
-      success: function (res) {
+      success: function(res) {
         console.log('success', res)
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log('fail', res)
       },
-      complete: function (res) {
+      complete: function(res) {
         console.log("上传完成！")
+        wx.hideLoading()
+        
+        wx.switchTab({
+          url: '../../pages/my/my'
+        })
+
+      }
+    })
+
+    uploadTask.onProgressUpdate((res) => {
+      console.log('上传进度', res.progress)
+      console.log('已经上传的数据长度', res.totalBytesSent)
+      console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+    })
+  },
+
+
+  bindFormSubmitVideos: function(e) {
+    let that = this;
+    console.log('图片路径', that.data.upVideoArr[0].tempFilePath)
+    console.log('文字', e.detail.value.textarea)
+    console.log('标签', that.data.navList[that.data.currentIndexNav])
+
+
+    wx.showLoading({
+      title: '发表中',
+    })
+
+    const uploadTask = wx.uploadFile({
+      url: 'https://videos.taouu.cn/collection/add',
+      filePath: that.data.upVideoArr[0].tempFilePath,
+      name: 'file',
+      formData: {
+        'wx_id': app.globalData.openId,
+        'type': 'video',
+        'create_time': util.formatTime(new Date()),
+        'index': 0,
+        'post': e.detail.value.textarea,
+        'label': that.data.navList[that.data.currentIndexNav],
+        'collection_gid': app.globalData.openId + util.time(new Date())
+      },
+
+      success: function(res) {
+        console.log('success', res)
+      },
+      fail: function(res) {
+        console.log('fail', res)
+      },
+      complete: function(res) {
+        console.log("上传完成！")
+        wx.hideLoading()
+        
+        wx.switchTab({
+          url: '../../pages/my/my'
+        })
+
       }
     })
 
@@ -125,24 +196,41 @@ Page({
     })
   },
 
-
-  uploadFiles(e) {
-    
-  },
-
-
   // 初始化加载
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.setData({
-      currentTab: options.index
+      currentTab: options.index,
+      currentIndexNav: '0',
+
+      //上传视频模块
+      upVideoArr: [], //存视频
+      maxVideoUploadLen: 1, //限制上传数量
+      upVideoPathLen: 0,
+
+      //上传图片
+      upImgArr: [], //存图片
+      maxImageUploadLen: 9, //限制上传数量
+      upImagePathLen: 0,
+
+      // 控制是否显示上传按钮
+      upVideoFilesBtn: true,
+      upImageFilesBtn: true,
     })
   },
 
 
-  //顶部tab切换
-  navbarTap: function (e) {
+  //视频tab切换
+  navbarTap: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
+    })
+  },
+
+  //标签tab切换
+  activeNav(e) {
+    //console.log(123);
+    this.setData({
+      currentIndexNav: e.target.dataset.index
     })
   },
 

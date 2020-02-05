@@ -392,3 +392,56 @@
 .select-title {
   font-size: 30rpx;
 }
+
+.tag-title {
+  font-size: 28rpx;
+}
+
+
+
+
+.nav_wrap {
+  display: flex;
+  height: 70rpx;
+}
+
+.nav_wrap_text {
+  width: 30%;
+  border-left: 2rpx solid #ddd;
+}
+
+.nav_wrap_text text {
+  font-size: 25rpx;
+  text-align: center;
+  margin-left: 30rpx;
+}
+
+.nav_wrap_text image {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 10rpx;
+}
+
+.nav {
+  white-space: nowrap;
+  padding: 5rpx 0;
+  width: 70%;
+  /* border: 2rpx solid rgb(0, 0, 0); */
+  display: flex;
+}
+
+.nav_item {
+  margin: 0 15rpx 0 15rpx;
+
+  font-size: 25rpx;
+  text-align: center;
+  display: inline-block;
+  /* border-radius: 5rpx; */
+  color: grey;
+}
+
+.nav_item.active {
+  font-size: 35rpx;
+  color: black;
+
+}

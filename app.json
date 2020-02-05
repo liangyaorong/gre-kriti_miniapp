@@ -2,16 +2,16 @@
   "pages": [
     "pages/start/start",
     "pages/home/home",
-    "pages/video-detail/video-detail",
     "pages/my/my",
-    "pages/upload/upload"
+    "pages/upload/upload",
+    "pages/check/check"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#fff",
-    "backgroundColor": "black"
+    "backgroundColor": "white"
   },
   "tabBar": {
     "color": "#b2b2b2",

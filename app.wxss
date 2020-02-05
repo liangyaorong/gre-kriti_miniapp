@@ -1,5 +1,11 @@
 /**app.wxss**/
 @import "/dist/packages/@zanui/index.wxss";
+
+page {
+  color: black;
+  /* padding: 10rpx; */
+}
+
 .container {
   height: 100%;
   display: flex;

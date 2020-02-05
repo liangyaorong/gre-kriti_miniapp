@@ -6,20 +6,51 @@ Page({
     remind: '加载中',
     angle: 0
   },
+
   goToIndex:function(){
     wx.switchTab({
       url: '/pages/home/home',
     });
+    console.log("openId", app.globalData.openId)
+
   },
+
+  getOpenId: function () {
+    var that = this;
+    wx.login({
+      success: function (res) {
+
+        // 改成服务器调接口
+        wx.request({
+          //获取openid接口  
+          url: 'https://api.weixin.qq.com/sns/jscode2session',
+          data: {
+            appid: 'wx18e21e713bbcc342',
+            secret: '26c587ff952331daac5480ee61572df9',
+            js_code: res.code,
+            grant_type: 'authorization_code'
+          },
+          method: 'GET',
+          success: function (res) {
+            app.globalData.openId = res.data.openid
+            app.globalData.sessionKey = res.data.session_key
+            that.setData({
+              openid: res.data.openid,
+              session_key: res.data.session_key
+            })
+            console.log(that.data)
+          }
+        })
+      }
+    })
+  },
+
+
   onLoad:function(){
-    // var that = this
-    // that.setData({
-    //   background_color: 'black',
-    //   bgRed: app.globalData.bgRed,
-    //   bgGreen: app.globalData.bgGreen,
-    //   bgBlue: app.globalData.bgBlue
-    // })
+    this.getOpenId();
   },
+
+
   onShow:function(){
 
   },

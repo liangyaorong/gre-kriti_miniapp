@@ -1,16 +1,8 @@
-/* 首页导航 */
-
-page {
-  color: #666;
-  /* padding: 10rpx; */
-}
+/* 顶部菜单切换 */
 
 .nav_area {
-  /* border-top: 1rpx solid rgb(224, 224, 224); */
-  /* border-bottom: 1rpx solid grey; */
+  color: grey;
 }
-
-/* 顶部菜单切换 */
 
 .navbar {
   /* display: flex; */
@@ -29,7 +21,8 @@ page {
 /* 选中菜单样式 */
 
 .navbar .item.active {
-  border-bottom: 6rpx solid grey;
+  border-bottom: 6rpx solid black;
+  color: black;
   font-size: 35rpx;
 }
 
@@ -52,14 +45,14 @@ page {
 }
 
 .nav_wrap_text {
-  width: 20%;
+  width: 27%;
   border-left: 2rpx solid #ddd;
 }
 
 .nav_wrap_text text {
   font-size: 25rpx;
   text-align: center;
-  margin-left: 30rpx;
+  margin-left: 15rpx;
 }
 
 .nav_wrap_text image {
@@ -71,7 +64,7 @@ page {
 .nav {
   white-space: nowrap;
   padding: 5rpx 0;
-  width: 80%;
+  width: 73%;
   /* border: 2rpx solid rgb(0, 0, 0); */
   display: flex;
 }
@@ -85,12 +78,13 @@ page {
 
 .nav_item.active {
   font-size: 30rpx;
+  color: black;
 }
 
 /* 轮播图样式 */
 
 .slides {
-  margin-top: 10rpx;
+  /* margin-top: 10rpx; */
 }
 
 .slides swiper {
@@ -131,7 +125,14 @@ page {
 
 .video_img image {
   width: 100%;
-  height: 500rpx;
+  height: 562rpx;
+  /* margin: 5rpx; */
+  border-radius: 0rpx;
+}
+
+swiper {
+  width: 100%;
+  height: 562rpx;
   /* margin: 5rpx; */
   border-radius: 0rpx;
 }
@@ -166,13 +167,13 @@ page {
 }
 
 .other {
-  padding: 10rpx;
+  padding: 20rpx;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   text-align: center;
   align-items: center;
-
+  border-bottom: 1rpx solid rgb(243, 243, 243);
   /* float: left; */
 }
 
@@ -236,4 +237,77 @@ page {
 .time {
   font-size: 25rpx;
   color: #999;
+}
+
+.search-bar {
+  position: relative;
+  margin: 10rpx 30rpx;
+  height: 70rpx;
+  display: flex;
+  border-radius: 10rpx;
+  /* border-top: 1rpx solid #D7D6DC;
+  border-bottom: 1rpx solid #D7D6DC; */
+}
+
+.icon-search {
+  margin-right: 4rpx;
+  font-size: inherit;
+}
+
+.con-search_in-box {
+  position: absolute;
+  left: 10rpx;
+  top: 30rpx;
+}
+
+.search-bar__text {
+  display: inline-block;
+  font-size: 16rpx;
+}
+
+.search-bar__form {
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex: auto;
+  flex: auto;
+  border-radius: 5rpx;
+  background: #fff;
+  border: 1rpx solid #e6e6ea;
+}
+
+.search-bar__box {
+  position: relative;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.search-bar__input {
+  height: 28rpx;
+  line-height: 28rpx;
+  font-size: 25rpx;
+}
+
+.search-bar__label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  border-radius: 14rpx;
+  text-align: center;
+  color: #9b9b9b;
+  background: #fff;
+  line-height: 28rpx;
+}
+
+.search-bar__cancel-btn {
+  margin-left: 10rpx;
+  line-height: 28rpx;
+  font-size: 25rpx;
+  color: #09bb07;
+  white-space: nowrap;
 }

@@ -80,35 +80,36 @@
   opacity: 0;
 }
 
-
 button {
   margin: 10px;
+}
 
-  }
-
-
-  .header {
-    margin: 90rpx 0 90rpx 50rpx;
-    text-align: center;
-    width: 650rpx;
-    height: 300rpx;
-    line-height: 450rpx;
+.header {
+  margin: 90rpx 0 90rpx 50rpx;
+  text-align: center;
+  width: 650rpx;
+  height: 300rpx;
+  line-height: 450rpx;
 }
 
 .header image {
-    width: 200rpx;
-    height: 200rpx;
+  width: 200rpx;
+  height: 200rpx;
 }
 
 .content {
-    margin-left: 50rpx;
-    margin-bottom: 90rpx;
+  margin-left: 50rpx;
+  margin-bottom: 90rpx;
 }
 
 .content text {
-    display: block;
-    color: #9d9d9d;
-    margin-top: 40rpx;
+  display: block;
+  color: #9d9d9d;
+  margin-top: 40rpx;
+}
+
+.nav_area {
+  color:grey;
 }
 
 /* 顶部菜单切换 */
@@ -130,7 +131,8 @@ button {
 /* 选中菜单样式 */
 
 .navbar .item.active {
-  border-bottom: 6rpx solid grey;
+  border-bottom: 6rpx solid black;
+  color: black;
   font-size: 35rpx;
 }
 
@@ -146,6 +148,69 @@ button {
   height: 4rpx;
   width: 3rpx;
 }
+
+.nav_wrap {
+  display: flex;
+  height: 70rpx;
+}
+
+.nav_wrap_text {
+  width: 30%;
+  border-left: 2rpx solid #ddd;
+}
+
+.nav_wrap_text text {
+  font-size: 25rpx;
+  text-align: center;
+  margin-left: 30rpx;
+}
+
+.nav_wrap_text image {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 10rpx;
+}
+
+.nav {
+  white-space: nowrap;
+  padding: 5rpx 0;
+  width: 70%;
+  /* border: 2rpx solid rgb(0, 0, 0); */
+  display: flex;
+}
+
+.nav_item {
+  padding-left: 35rpx;
+  font-size: 25rpx;
+  text-align: center;
+  display: inline-block;
+}
+
+.nav_item.active {
+  font-size: 30rpx;
+  color: black;
+}
+
+/* 轮播图样式 */
+
+.slides {
+  /* margin-top: 10rpx; */
+}
+
+.slides swiper {
+  height: 220rpx;
+}
+
+.slides navigator {
+  width: 100%;
+  height: 100%;
+}
+
+.slides image {
+  width: 100%;
+  height: 400rpx;
+}
+
 /*
 视频列表
 */
@@ -170,7 +235,14 @@ button {
 
 .video_img image {
   width: 100%;
-  height: 500rpx;
+  height: 562rpx;
+  /* margin: 5rpx; */
+  border-radius: 0rpx;
+}
+
+swiper {
+  width: 100%;
+  height: 562rpx;
   /* margin: 5rpx; */
   border-radius: 0rpx;
 }
@@ -205,13 +277,13 @@ button {
 }
 
 .other {
-  padding: 10rpx;
+  padding: 20rpx;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   text-align: center;
   align-items: center;
-
+  border-bottom: 1rpx solid rgb(243, 243, 243);
   /* float: left; */
 }
 
@@ -276,4 +348,3 @@ button {
   font-size: 25rpx;
   color: #999;
 }
-
