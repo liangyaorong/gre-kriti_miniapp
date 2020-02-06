@@ -11,7 +11,8 @@ App({
     nickName: "",
     avatarUrl: "",
     phoneNumber:"",
-    sessionKey:""
+    sessionKey:"",
+    isAdmin:""
   }
 
 })

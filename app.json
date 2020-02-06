@@ -35,6 +35,12 @@
         "iconPath": "images/contact-o.png",
         "selectedIconPath": "images/contact.png",
         "text": "我的"
+      },
+      {
+        "pagePath": "pages/check/check",
+        "iconPath": "images/contact-o.png",
+        "selectedIconPath": "images/contact.png",
+        "text": "审核"
       }
     ]
   },
