@@ -28,7 +28,7 @@
       {
         "pagePath": "pages/upload/upload",
         "iconPath": "images/加号1.png",
-        "selectedIconPath": "images/加号2.png",
+        "selectedIconPath": "images/加号1.png",
         "text": "上传"
       },
       {

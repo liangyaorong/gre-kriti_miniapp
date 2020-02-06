@@ -17,6 +17,10 @@
     <button bindtap="goCheck" type='primary'>你是管理员，前往审核</button>
   </view>
 
+  <view wx:if="{{phone}} == ''">
+    <button open-type='getPhomeNumber' bindgetphonenumber="getPhomeNumber" type='primary'>留下电话号码吧，可能有奖品发送哦</button>
+  </view>
+
   <!--图片-->
   <view hidden="{{currentTab!='0'}}">
     <!-- 图片列表 -->
