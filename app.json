@@ -4,7 +4,8 @@
     "pages/home/home",
     "pages/my/my",
     "pages/upload/upload",
-    "pages/check/check"
+    "pages/check/check",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "dark",

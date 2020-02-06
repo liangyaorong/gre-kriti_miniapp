@@ -48,16 +48,24 @@ Page({
     wx.request({
       //获取openid接口  
       url: 'https://videos.taouu.cn/login/useradd',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
       data: {
         open_id: app.globalData.openId,
-        phone:'17623',
+        // open_id:'345',
+        phone: '17623',
         wx_name: e.detail.userInfo.nickName,
         wx_head_url: e.detail.userInfo.avatarUrl
+        // wx_name:"jerry",
+        // wx_head_url: 'https://wx.qlogo.cn'
+
       },
       method: 'POST',
       success: function (res) {
         console.log(res)
-        // app.globalData.openId = res.data.openid
+        app.globalData.nickName = e.detail.userInfo.nickName
+        app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
         // app.globalData.sessionKey = res.data.session_key
         // that.setData({
         //   openid: res.data.openid,
@@ -78,7 +86,6 @@ Page({
     // console.log()
     // console.log(e.detail.rawData)
   },
-
 
   tryToGetUserInfo: function (e) {
     var that = this
