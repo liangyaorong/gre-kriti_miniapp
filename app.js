@@ -7,7 +7,7 @@ App({
 
   //全局变量
   globalData: {
-    openId: "sfdsf",
+    openId: "",
     nickName: "",
     avatarUrl: "",
     phoneNumber:"",

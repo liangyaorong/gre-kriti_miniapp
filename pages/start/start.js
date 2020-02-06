@@ -19,19 +19,16 @@ Page({
     var that = this;
     wx.login({
       success: function (res) {
-
-        // 改成服务器调接口
+        console.log("code", res.code)
         wx.request({
           //获取openid接口  
-          url: 'https://api.weixin.qq.com/sns/jscode2session',
+          url: 'https://videos.taouu.cn/login/regist',
           data: {
-            appid: 'wx18e21e713bbcc342',
-            secret: '26c587ff952331daac5480ee61572df9',
             js_code: res.code,
-            grant_type: 'authorization_code'
           },
           method: 'GET',
           success: function (res) {
+            console.log(res)
             app.globalData.openId = res.data.openid
             app.globalData.sessionKey = res.data.session_key
             that.setData({

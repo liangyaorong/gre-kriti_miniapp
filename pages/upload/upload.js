@@ -68,6 +68,10 @@ Page({
       },
       fail: function(res) {
         console.log('fail', res)
+        wx.hideLoading()
+        wx.switchTab({
+          url: '../../pages/my/my'
+        })
       },
       complete: function(res) {
         console.log("上传完成！")
@@ -117,7 +121,10 @@ Page({
         console.log('success', res)
       },
       fail: function(res) {
-        console.log('fail', res)
+        wx.hideLoading()
+        wx.switchTab({
+          url: '../../pages/my/my'
+        })
       },
       complete: function(res) {
         console.log("上传完成！")

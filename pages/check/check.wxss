@@ -1,6 +1,7 @@
 .main {
   margin: 20rpx;
 }
+
 .box {
   background: white;
   margin-bottom: 15rpx;
@@ -53,12 +54,9 @@
 }
 
 .other {
-  padding: 10rpx;
-  display: flex;
-  flex-wrap: wrap;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
   justify-content: space-around;
-  background: white;
-  border-top: 1px solid rgb(247, 245, 245);
   text-align: center;
   align-items: center;
 }
@@ -112,7 +110,7 @@ button {
 }
 
 .nav_area {
-  color:grey;
+  color: grey;
 }
 
 /* 顶部菜单切换 */
@@ -230,6 +228,8 @@ button {
 .video_item {
   width: 48%;
   margin: 30rpx 0 0 0;
+  border: 1rpx solid #ddd;
+  border-radius: 20rpx;
 }
 
 .video_img {
@@ -240,20 +240,17 @@ button {
   width: 100%;
   height: 300rpx;
   /* margin: 5rpx; */
-  border-radius: 0rpx;
 }
 
 swiper {
-  width: 100%;
+  width: 95%;
   height: 300rpx;
-  /* margin: 5rpx; */
-  border-radius: 0rpx;
+  margin-left: 8rpx;
 }
 
 .video_img video {
   width: 100%;
   height: 500rpx;
-  border-radius: 0rpx;
 }
 
 .video_img .video_info {
@@ -281,14 +278,14 @@ swiper {
 }
 
 .other {
-  padding: 20rpx;
+  /* padding: 20rpx; */
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   justify-content: space-around;
   text-align: center;
   align-items: center;
-  border-bottom: 1rpx solid rgb(243, 243, 243);
-  /* float: left; */
+  /* border-bottom: 1rpx solid rgb(243, 243, 243); *//* float: left; */
 }
 
 .other image {
