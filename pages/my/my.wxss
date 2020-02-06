@@ -1,6 +1,6 @@
 .box {
   background: white;
-  margin-bottom: 15rpx;
+  /* margin-bottom: 15rpx; */
 }
 
 .my-name {
@@ -108,15 +108,15 @@ button {
   margin-top: 40rpx;
 }
 
-.nav_area {
-  color:grey;
-}
+
 
 /* 顶部菜单切换 */
 
 .navbar {
   /* display: flex; */
   height: 70rpx;
+  background-color: white;
+
 }
 
 /* 默认选中菜单 */
@@ -226,7 +226,9 @@ button {
 
 .video_item {
   width: 100%;
-  margin: 20rpx 0 0 0;
+  margin: 20rpx 20rpx 0 20rpx;
+  background-color: white;
+  border-radius: 20rpx;
 }
 
 .video_img {

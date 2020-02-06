@@ -1,6 +1,12 @@
+.total {
+  background-color: #f4f4f4;
+}
+
 /* 顶部菜单切换 */
+
 .nav_area {
-  color:grey;
+  color: grey;
+  background-color: white;
 }
 
 .navbar {
@@ -77,22 +83,13 @@
 
 .nav_item.active {
   font-size: 30rpx;
-    color: black;
+  color: black;
 }
 
-/* 轮播图样式 */
+/* 头图样式 */
 
 .slides {
-  /* margin-top: 10rpx; */
-}
-
-.slides swiper {
-  height: 220rpx;
-}
-
-.slides navigator {
-  width: 100%;
-  height: 100%;
+  height: 400rpx;
 }
 
 .slides image {
@@ -107,17 +104,15 @@
 .video_wrap {
   display: flex;
   flex-wrap: wrap;
-  
   /* padding: 5rpx; */
   justify-content: space-between;
-  /* background-color: #ddd; */
   margin-bottom: 10rpx;
 }
 
 .video_item {
   width: 100%;
-  margin: 20rpx 10rpx 0 10rpx;
-    border: 1rpx solid #ddd;
+  margin: 20rpx 20rpx 0 20rpx;
+  background-color: white;
   border-radius: 20rpx;
 }
 
@@ -133,8 +128,8 @@
 }
 
 swiper {
-    width: 100%;
-    height: 562rpx;
+  width: 100%;
+  height: 562rpx;
   /* margin: 5rpx; */
   border-radius: 0rpx;
 }
@@ -174,8 +169,7 @@ swiper {
   justify-content: space-around;
   text-align: center;
   align-items: center;
-  /* border-bottom: 1rpx solid rgb(243, 243, 243); */
-  /* float: left; */
+  /* border-bottom: 1rpx solid rgb(243, 243, 243); *//* float: left; */
 }
 
 .other image {
@@ -193,10 +187,10 @@ swiper {
   line-height: 50rpx;
 }
 
-.head-title {
+/* .head-title {
   margin: 20rpx 30rpx 50rpx 50rpx;
   color: grey;
-}
+} */
 
 .artist {
   /* border-top: 1rpx solid #ddd; */
@@ -245,33 +239,37 @@ swiper {
   margin: 10rpx 30rpx;
   height: 70rpx;
   display: flex;
-    border-radius: 10rpx;
-
+  border-radius: 10rpx;
   /* border-top: 1rpx solid #D7D6DC;
   border-bottom: 1rpx solid #D7D6DC; */
 }
+
 .icon-search {
   margin-right: 4rpx;
   font-size: inherit;
 }
+
 .con-search_in-box {
   position: absolute;
   left: 10rpx;
   top: 30rpx;
 }
+
 .search-bar__text {
   display: inline-block;
   font-size: 16rpx;
 }
+
 .search-bar__form {
   position: relative;
   -webkit-box-flex: 1;
   -webkit-flex: auto;
-          flex: auto;
+  flex: auto;
   border-radius: 5rpx;
-  background: #FFFFFF;
-  border: 1rpx solid #E6E6EA;
+  background: #fff;
+  border: 1rpx solid #e6e6ea;
 }
+
 .search-bar__box {
   position: relative;
   padding-left: 30rpx;
@@ -280,11 +278,13 @@ swiper {
   box-sizing: border-box;
   z-index: 1;
 }
+
 .search-bar__input {
   height: 28rpx;
   line-height: 28rpx;
   font-size: 25rpx;
 }
+
 .search-bar__label {
   position: absolute;
   top: 0;
@@ -294,14 +294,15 @@ swiper {
   z-index: 2;
   border-radius: 14rpx;
   text-align: center;
-  color: #9B9B9B;
-  background: #FFFFFF;
+  color: #9b9b9b;
+  background: #fff;
   line-height: 28rpx;
 }
+
 .search-bar__cancel-btn {
   margin-left: 10rpx;
   line-height: 28rpx;
   font-size: 25rpx;
-  color: #09BB07;
+  color: #09bb07;
   white-space: nowrap;
 }

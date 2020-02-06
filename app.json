@@ -27,8 +27,8 @@
       },
       {
         "pagePath": "pages/upload/upload",
-        "iconPath": "images/add-o.png",
-        "selectedIconPath": "images/add.png",
+        "iconPath": "images/加号1.png",
+        "selectedIconPath": "images/加号2.png",
         "text": "上传"
       },
       {
@@ -36,12 +36,6 @@
         "iconPath": "images/contact-o.png",
         "selectedIconPath": "images/contact.png",
         "text": "我的"
-      },
-      {
-        "pagePath": "pages/check/check",
-        "iconPath": "images/contact-o.png",
-        "selectedIconPath": "images/contact.png",
-        "text": "审核"
       }
     ]
   },

@@ -30,90 +30,32 @@ Page({
     videosList: [],
     imagesList: [],
 
-    nickName: "",
+    nickName: '',
 
-    avatarUrl: ""
+    avatarUrl: ''
 
  
   },
 
 
-  onGotUserInfo: function (e) {
-    var that = this
-    console.log("openId:", app.globalData.openId)
-    console.log("nickName:", e.detail.userInfo.nickName)
-    console.log("wx_head_url:", e.detail.userInfo.avatarUrl)
-
-
-    wx.request({
-      //获取openid接口  
-      url: 'https://videos.taouu.cn/login/useradd',
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        open_id: app.globalData.openId,
-        // open_id:'345',
-        phone: '17623',
-        wx_name: e.detail.userInfo.nickName,
-        wx_head_url: e.detail.userInfo.avatarUrl
-        // wx_name:"jerry",
-        // wx_head_url: 'https://wx.qlogo.cn'
-
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res)
-        app.globalData.nickName = e.detail.userInfo.nickName
-        app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
-        // app.globalData.sessionKey = res.data.session_key
-        // that.setData({
-        //   openid: res.data.openid,
-        //   session_key: res.data.session_key
-        // })
-        // console.log(that.data)
-      }
-    })
-
-    // that.setData({
-    //   nickName: e.detail.userInfo.nickName,
-    //   avatarUrl: e.detail.userInfo.avatarUrl
-    // })
+  goCheck() {
     wx.navigateTo({
-      url: '../../pages/my/my',
-    })
-    // console.log(e.detail.errMsg)
-    // console.log()
-    // console.log(e.detail.rawData)
-  },
-
-  tryToGetUserInfo: function (e) {
-    var that = this
-    
-    wx.getUserInfo({
-      success: function (res) {
-        var userInfo = res.userInfo
-        that.setData({
-          nickName: userInfo.nickName,
-          avatarUrl: userInfo.avatarUrl
-        })
-      }
-    })
-
-  },
-  
-
+      url: '/pages/check/check',
+    });
+  }  ,
+ 
 
   /**
      * 生命周期函数--监听页面加载
      */
   onLoad: function (options) {
     this.getImagesList();
-    // this.tryToGetUserInfo();
-
-    if (app.globalData.isAdmin == "true") {
-      
-    }
+    var that = this
+    console.log("nikename", app.globalData.nickName)
+    that.setData({
+      nickName: app.globalData.nickName,
+      avatarUrl: app.globalData.avatarUrl
+    })
 
   },
 

@@ -1,11 +1,11 @@
-<view class="main">
-  <view class='nav_wrap'>
+
     <view class="navbar">
       <lable wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="" bindtap="navbarTap">
         <text>{{item}}</text>
       </lable>
     </view>
-  </view>
+<view class="main">
+
 
 
   <!--图片-->

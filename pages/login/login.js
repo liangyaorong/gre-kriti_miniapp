@@ -29,41 +29,26 @@ Page({
       },
       data: {
         open_id: app.globalData.openId,
-        // open_id:'345',
-        phone: '17623',
+        phone: '',
         wx_name: e.detail.userInfo.nickName,
         wx_head_url: e.detail.userInfo.avatarUrl
-        // wx_name:"jerry",
-        // wx_head_url: 'https://wx.qlogo.cn'
-
       },
       method: 'POST',
       success: function (res) {
         console.log(res)
         app.globalData.nickName = e.detail.userInfo.nickName
         app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
-        // app.globalData.sessionKey = res.data.session_key
-        // that.setData({
-        //   openid: res.data.openid,
-        //   session_key: res.data.session_key
-        // })
-        // console.log(that.data)
       }
     })
-
-    // that.setData({
-    //   nickName: e.detail.userInfo.nickName,
-    //   avatarUrl: e.detail.userInfo.avatarUrl
-    // })
-    wx.navigateTo({
-      url: '../../pages/my/my',
-    })
-    // console.log(e.detail.errMsg)
-    // console.log()
-    // console.log(e.detail.rawData)
+    this.goHome();
   },
 
-
+  goHome: function () {
+    wx.switchTab({
+      url: '/pages/home/home',
+    });
+    console.log("openId", app.globalData.openId)
+  },
 
   /**
      * 生命周期函数--监听页面加载

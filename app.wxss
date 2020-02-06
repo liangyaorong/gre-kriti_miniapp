@@ -3,6 +3,7 @@
 
 page {
   color: black;
+  background-color: #f4f4f4;
   /* padding: 10rpx; */
 }
 
@@ -14,11 +15,9 @@ page {
   justify-content: space-between;
   box-sizing: border-box;
 }
+
 /*最原始只有上面，下面均为添加过度界面设置*/
+
 .wxParse-img {
   display: block !important;
 }
-
-
-
-

@@ -13,7 +13,7 @@
       </view> -->
       <view class="bd">
         <!-- <image class="smalltitle" src="/images/more/confirm-word1.png"></image> -->
-        <wxc-button class="confirm-btn" size='large' bindclick='goToIndex'>
+        <wxc-button class="confirm-btn" size='large' bindclick='login'>
           打开精彩 
           <!-- <wxc-icon style='margin-left:20rpx;' color="#fff" type="arrow-right"></wxc-icon> -->
         </wxc-button>

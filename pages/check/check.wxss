@@ -1,5 +1,5 @@
 .main {
-  margin: 20rpx;
+  margin: 10rpx;
 }
 
 .box {
@@ -118,6 +118,8 @@ button {
 .navbar {
   /* display: flex; */
   height: 70rpx;
+  width: 100%;
+  background-color: white;
 }
 
 /* 默认选中菜单 */
@@ -150,10 +152,7 @@ button {
   width: 3rpx;
 }
 
-.nav_wrap {
-  display: flex;
-  height: 70rpx;
-}
+
 
 .nav_wrap_text {
   width: 30%;
@@ -221,14 +220,15 @@ button {
   flex-wrap: wrap;
   /* padding: 5rpx; */
   justify-content: space-between;
-  /* background-color: #ddd; */
   margin-bottom: 10rpx;
 }
 
 .video_item {
   width: 48%;
   margin: 30rpx 0 0 0;
-  border: 1rpx solid #ddd;
+  background-color: white;
+
+  /* border: 1rpx solid #ddd; */
   border-radius: 20rpx;
 }
 
