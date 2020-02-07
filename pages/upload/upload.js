@@ -54,7 +54,7 @@ Page({
       filePath: that.data.upImgArr[0].path,
       name: 'file',
       formData: {
-        'wx_id': app.globalData.openId,
+        'wx_open_id': app.globalData.openId,
         'type': 'picture',
         'create_time': util.formatTime(new Date()),
         'index': 0,
@@ -108,7 +108,7 @@ Page({
       filePath: that.data.upVideoArr[0].tempFilePath,
       name: 'file',
       formData: {
-        'wx_id': app.globalData.openId,
+        'wx_open_id': app.globalData.openId,
         'type': 'video',
         'create_time': util.formatTime(new Date()),
         'index': 0,

@@ -47,7 +47,7 @@ Page({
     wx.request({
       url: 'https://videos.taouu.cn/home/stream',
       data: {
-        "wx_id": "all",
+        "wx_open_id": "all",
         'page': 0,
         "page_size": "20",
         "label": "all",
@@ -81,7 +81,7 @@ Page({
     wx.request({
       url: 'https://videos.taouu.cn/home/stream',
       data: {
-        "wx_id": "all",
+        "wx_open_id": "all",
         'page': 0,
         "page_size": "20",
         "label": "%",

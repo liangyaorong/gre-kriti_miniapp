@@ -24,11 +24,11 @@ Page({
     wx.request({
       //获取openid接口  
       url: 'https://videos.taouu.cn/login/useradd',
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
+      header:{
+        'content-type': 'application/x-www-form-urlencoded'
       },
       data: {
-        open_id: app.globalData.openId,
+        wx_open_id: app.globalData.openId,
         phone: '',
         wx_name: e.detail.userInfo.nickName,
         wx_head_url: e.detail.userInfo.avatarUrl
