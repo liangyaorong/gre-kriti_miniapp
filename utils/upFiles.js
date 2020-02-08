@@ -98,9 +98,11 @@ var getPathArr = t => {
   return filesPathsArr;
 }
 
+
 var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
   console.log("上传index", uploadIndex)
-  console.log('图片路径', that.data.upImgArr[uploadIndex].path)
+  console.log('上传图片数量', that.data.upImgArr.length)
+  console.log('当前图片路径', that.data.upImgArr[uploadIndex].path)
   console.log('文字', post)
   console.log('标签', that.data.navList[that.data.currentIndexNav])
   console.log('时间', util.time(dataTime))
@@ -131,9 +133,19 @@ var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
       console.log('fail', res)
     },
     complete: function(res) {
+      console.log("当前index", uploadIndex)
+      console.log("一共的index数", that.data.upImgArr.length - 1)
+      console.log("是否继续上传", uploadIndex >= that.data.upImgArr.length - 1)
+
+
       if (uploadIndex >= that.data.upImgArr.length - 1) {
         console.log("上传完成！")
         wx.hideLoading()
+        that.setData({
+          upImgArr: [],
+          upImagePathLen: 0,
+          currentIndexNav: 0
+        })
         wx.switchTab({
           url: '../../pages/my/my'
         })
@@ -149,11 +161,7 @@ var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
     console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
   })
 
-  that.setData({
-    upImgArr: [],
-    upImagePathLen: 0,
-    currentIndexNav: 0
-  })
+
 }
 
 var upFilesFun = (t, uploadUrl, filesPath, formatData) => {

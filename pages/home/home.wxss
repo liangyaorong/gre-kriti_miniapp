@@ -46,7 +46,8 @@
 
 .nav_wrap {
   display: flex;
-  height: 70rpx;
+  height: 60rpx;
+  padding: 10rpx;
 }
 
 .nav_wrap_text {
