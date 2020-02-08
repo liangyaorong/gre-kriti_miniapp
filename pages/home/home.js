@@ -67,12 +67,6 @@ Page({
         })
       }
     })
-
-    // that.setData({
-    //   imagesList: images.homeIndex,
-    //   iamgePage: 0
-    // })
-
   },
 
   // 获取视频列表数据

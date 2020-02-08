@@ -64,7 +64,6 @@
 
           <!-- 图片容器 -->
           <view class='video_img'>
-
             <swiper indicator-dots="Boolean">
               <block wx:for="{{item.itemUrls}}" wx:for-item="url" wx:key="">
                 <swiper-item>

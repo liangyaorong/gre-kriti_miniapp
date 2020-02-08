@@ -31,10 +31,9 @@ Page({
     imagesList: [],
 
     nickName: '',
-
-    avatarUrl: ''
-
- 
+    avatarUrl: '',
+    isAdmin: '',
+    phone: ''
   },
 
 
@@ -42,8 +41,8 @@ Page({
     wx.navigateTo({
       url: '/pages/check/check',
     });
-  }  ,
- 
+  },
+
 
   /**
      * 生命周期函数--监听页面加载
@@ -51,11 +50,15 @@ Page({
   onLoad: function (options) {
     this.getImagesList();
     var that = this
-    console.log("nikename", app.globalData.nickName)
+    console.log("nikename", app.globalData)
     that.setData({
       nickName: app.globalData.nickName,
-      avatarUrl: app.globalData.avatarUrl
+      avatarUrl: app.globalData.avatarUrl,
+      isAdmin: app.globalData.isAdmin,
+      phone: app.globalData.phoneNumber
     })
+    console.log("nickname", that.data)
+
 
   },
 

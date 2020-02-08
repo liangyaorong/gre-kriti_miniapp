@@ -237,21 +237,21 @@ button {
 
 .video_img image {
   width: 100%;
-  height: 562rpx;
+  height: 700rpx;
   /* margin: 5rpx; */
   border-radius: 0rpx;
 }
 
 swiper {
   width: 100%;
-  height: 562rpx;
+  height: 700rpx;
   /* margin: 5rpx; */
   border-radius: 0rpx;
 }
 
 .video_img video {
   width: 100%;
-  height: 500rpx;
+  height: 700rpx;
   border-radius: 0rpx;
 }
 
@@ -279,13 +279,13 @@ swiper {
 }
 
 .other {
-  padding: 20rpx;
+  padding: 15rpx;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   text-align: center;
   align-items: center;
-  border-bottom: 1rpx solid rgb(243, 243, 243);
+  /* border-bottom: 1rpx solid rgb(243, 243, 243); */
   /* float: left; */
 }
 

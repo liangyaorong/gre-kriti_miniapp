@@ -46,14 +46,19 @@ Page({
             console.log(res)
             app.globalData.openId = res.data.openid
             app.globalData.sessionKey = res.data.session_key
-            app.globalData.nickName = ''
-            app.globalData.avatarUrl = ''
-            app.globalData.phoneNumber = ''
-            app.globalData.isAdmin = ''
-            // app.globalData.nickName = res.data.wxName
-            // app.globalData.avatarUrl = res.data.wxName
-            // app.globalData.phoneNumber = res.data.wxName
-            // app.globalData.isAdmin = res.data.wxName
+            if (res.data.user == null) {
+              app.globalData.nickName = ''
+              app.globalData.avatarUrl = ''
+              app.globalData.phoneNumber = ''
+              app.globalData.isAdmin = false
+            } else {
+              app.globalData.nickName = res.data.user.wxName
+              app.globalData.avatarUrl = res.data.user.wxHeadUrl
+              // app.globalData.phoneNumber = res.data.user.phone
+              // app.globalData.isAdmin = res.data.user.isAdmin
+              app.globalData.phoneNumber = ''
+              app.globalData.isAdmin = true
+            }
           }
         })
       }

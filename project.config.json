@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -19,7 +19,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.6.6",
-	"appid": "wx18e21e713bbcc342",
+	"appid": "wxeedb25f14b701d6b",
 	"projectname": "grekriti",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

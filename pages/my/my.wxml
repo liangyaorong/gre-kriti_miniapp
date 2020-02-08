@@ -13,11 +13,11 @@
   </view>
 
 
-  <view wx:if="{{isAdmin}} == 'true' || true ">
+  <view hidden="{{!isAdmin}}">
     <button bindtap="goCheck" type='primary'>你是管理员，前往审核</button>
   </view>
 
-  <view wx:if="{{phone}} == ''">
+  <view hidden="{{phone != ''}}">
     <button open-type='getPhomeNumber' bindgetphonenumber="getPhomeNumber" type='primary'>留下电话号码吧，可能有奖品发送哦</button>
   </view>
 
