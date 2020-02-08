@@ -4,6 +4,14 @@
       <image src="{{avatarUrl}}"></image>
       <text class="Username">{{nickName}}</text>
     </view>
+
+    <view hidden="{{!isAdmin}}" class= 'shenhe'>
+      <button bindtap="goCheck" type='primary'>你是管理员，前往审核</button>
+    </view>
+
+    <view hidden="{{phone != ''}}"  class= 'shenhe'>
+      <button open-type='getPhomeNumber' bindgetphonenumber="getPhomeNumber" type='primary'>留下电话号码吧，可能有奖品发送哦</button>
+    </view>
   </view>
 
   <view class="navbar">
@@ -13,13 +21,7 @@
   </view>
 
 
-  <view hidden="{{!isAdmin}}">
-    <button bindtap="goCheck" type='primary'>你是管理员，前往审核</button>
-  </view>
 
-  <view hidden="{{phone != ''}}">
-    <button open-type='getPhomeNumber' bindgetphonenumber="getPhomeNumber" type='primary'>留下电话号码吧，可能有奖品发送哦</button>
-  </view>
 
   <!--图片-->
   <view hidden="{{currentTab!='0'}}">

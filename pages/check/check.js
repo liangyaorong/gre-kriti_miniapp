@@ -1,7 +1,7 @@
 var images = require("../../data/Post_data.js")
 var videos = require("../../data/Video_data.js")
-const APP_ID = 'wx18e21e713bbcc342';//输入小程序appid  
-const APP_SECRET = '26c587ff952331daac5480ee61572df9';//输入小程序
+const APP_ID = 'wx18e21e713bbcc342'; //输入小程序appid  
+const APP_SECRET = '26c587ff952331daac5480ee61572df9'; //输入小程序
 var app = getApp().globalData.userInfo
 
 Page({
@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    inputShowed: false,  //初始文本框不显示内容
+    inputShowed: false, //初始文本框不显示内容
 
     iamgePage: 0,
     videoPage: 0,
@@ -38,49 +38,14 @@ Page({
   },
 
 
-  onGotUserInfo: function (e) {
-    var that = this
-    that.setData({
-      nickName: e.detail.userInfo.nickName,
-      avatarUrl: e.detail.userInfo.avatarUrl
-    })
-    wx.navigateTo({
-      url: '../../pages/my/my',
-    })
-    // console.log(e.detail.errMsg)
-    // console.log()
-    // console.log(e.detail.rawData)
-  },
-
-
-  tryToGetUserInfo: function (e) {
-    var that = this
-
-    wx.getUserInfo({
-      success: function (res) {
-        var userInfo = res.userInfo
-        that.setData({
-          nickName: userInfo.nickName,
-          avatarUrl: userInfo.avatarUrl
-        })
-      }
-    })
-
-  },
 
 
 
   /**
-     * 生命周期函数--监听页面加载
-     */
-  onLoad: function (options) {
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
     this.getImagesList();
-    wx.showLoading({
-      title: '发表中',
-    })
-
-    this.tryToGetUserInfo();
-    wx.hideLoading()
 
   },
 
@@ -169,6 +134,7 @@ Page({
       iamgePage: 0
     })
 
+
   },
 
   // 获取视频列表数据
@@ -207,7 +173,7 @@ Page({
 
 
   //顶部tab切换
-  navbarTap: function (e) {
+  navbarTap: function(e) {
     // console.log("data")
     var curIdx = e.currentTarget.dataset.idx
     console.log(curIdx)
@@ -232,7 +198,7 @@ Page({
   },
 
   // 图片预览
-  previewImg: function (e) {
+  previewImg: function(e) {
     var scr = e.currentTarget.dataset.scr;
     var scrlist = e.currentTarget.dataset.scrlist;
     wx.previewImage({
@@ -240,62 +206,89 @@ Page({
       //当前图片地址
       urls: scrlist,
       //所有要预览的图片的地址集合 数组形式
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   },
 
-  watch: function (e) {
-    console.log('浏览+1')
+  pass: function(e) {
+    console.log('审核通过', e.currentTarget.dataset.collectionid)
+    console.log('类型', e.currentTarget.dataset.type)
+
+    var that = this
+    var itemList = []
+    if (e.currentTarget.dataset.type == "image") {
+      itemList = that.data.imagesList
+    } else if (e.currentTarget.dataset.type == "video"){
+      itemList = that.data.videosList
+    }
+    for (var i = 0; i < itemList.length; i++) {
+      if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+        itemList.splice(i, 1)
+        if (e.currentTarget.dataset.type == "image") {
+          console.log("item", itemList)
+          that.setData({
+            imagesList: itemList
+          })
+        } else if (e.currentTarget.dataset.type == "video"){
+          that.setData({
+            videosList: itemList
+          })
+        }
+        break
+      }
+    }
   },
 
-  // 使文本框进入可编辑状态
-  showInput: function () {
-    this.setData({
-      inputShowed: true   //设置文本框可以输入内容
-    });
+  notPass: function(e) {
+    console.log('审核不通过', e.currentTarget.dataset.collectionid)
+    var that = this
+    var index = null
+    var imageList = that.data.videosList
+    for (var i = 0; i < imageList.length; i++) {
+      if (imageList[i].collectionId == e.currentTarget.dataset.collectionid) {
+        imageList.splice(i, 1)
+        that.setData({
+          videosList: imageList
+        })
+        break
+      }
+    }
   },
-  // 取消搜索
-  hideInput: function () {
-    this.setData({
-      inputShowed: false
-    });
-  },
-
 
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

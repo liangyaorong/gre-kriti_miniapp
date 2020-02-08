@@ -67,7 +67,6 @@ Page({
         console.log('success', res)
       },
       fail: function(res) {
-        console.log('fail', res)
         wx.hideLoading()
         // wx.switchTab({
         //   url: '../../pages/my/my'
@@ -76,7 +75,6 @@ Page({
       complete: function(res) {
         console.log("上传完成！")
         wx.hideLoading()
-        
         wx.switchTab({
           url: '../../pages/my/my'
         })
@@ -88,6 +86,12 @@ Page({
       console.log('上传进度', res.progress)
       console.log('已经上传的数据长度', res.totalBytesSent)
       console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+    })
+
+    that.setData({
+      upImgArr: [],
+      upImagePathLen: 0,
+      currentIndexNav:0
     })
   },
 
@@ -122,14 +126,14 @@ Page({
       },
       fail: function(res) {
         wx.hideLoading()
-        wx.switchTab({
-          url: '../../pages/my/my'
-        })
+        // wx.switchTab({
+        //   url: '../../pages/my/my'
+        // })
       },
       complete: function(res) {
         console.log("上传完成！")
         wx.hideLoading()
-        
+   
         wx.switchTab({
           url: '../../pages/my/my'
         })
@@ -141,6 +145,12 @@ Page({
       console.log('上传进度', res.progress)
       console.log('已经上传的数据长度', res.totalBytesSent)
       console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+    })
+
+    that.setData({
+      upVideoArr: [], //存视频
+      upVideoPathLen: 0,
+      currentIndexNav: 0
     })
   },
 
@@ -175,7 +185,6 @@ Page({
             that.setData({
               upImgArr: upImgArr,
               upImagePathLen: upImgArr.length
-
             })
             if (upImgArr.length < that.data.maxImageUploadLen) {
               that.setData({
