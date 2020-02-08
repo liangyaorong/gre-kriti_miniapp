@@ -5,6 +5,7 @@
 /* 顶部菜单切换 */
 
 .nav_area {
+  padding-top: 10rpx;
   color: grey;
   background-color: white;
 }
@@ -102,6 +103,8 @@
 */
 
 .video_wrap {
+    width: 100%;
+
   display: flex;
   flex-wrap: wrap;
   /* padding: 5rpx; */
@@ -122,22 +125,20 @@
 
 .video_img image {
   width: 100%;
-  height: 700rpx;
+  height:500rpx;
   /* margin: 5rpx; */
   border-radius: 0rpx;
 }
 
 swiper {
   width: 100%;
-  height: 700rpx;
+  height:500rpx;
   /* margin: 5rpx; */
-  border-radius: 0rpx;
 }
 
 .video_img video {
   width: 100%;
-  height: 700rpx;
-  border-radius: 0rpx;
+  height: 500rpx;
 }
 
 .video_img .video_info {
