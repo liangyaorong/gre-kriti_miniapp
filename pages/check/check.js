@@ -220,7 +220,7 @@ Page({
     var itemList = []
     if (e.currentTarget.dataset.type == "image") {
       itemList = that.data.imagesList
-    } else if (e.currentTarget.dataset.type == "video"){
+    } else if (e.currentTarget.dataset.type == "video") {
       itemList = that.data.videosList
     }
     for (var i = 0; i < itemList.length; i++) {
@@ -231,7 +231,7 @@ Page({
           that.setData({
             imagesList: itemList
           })
-        } else if (e.currentTarget.dataset.type == "video"){
+        } else if (e.currentTarget.dataset.type == "video") {
           that.setData({
             videosList: itemList
           })
@@ -244,14 +244,25 @@ Page({
   notPass: function(e) {
     console.log('审核不通过', e.currentTarget.dataset.collectionid)
     var that = this
-    var index = null
-    var imageList = that.data.videosList
-    for (var i = 0; i < imageList.length; i++) {
-      if (imageList[i].collectionId == e.currentTarget.dataset.collectionid) {
-        imageList.splice(i, 1)
-        that.setData({
-          videosList: imageList
-        })
+    var itemList = []
+    if (e.currentTarget.dataset.type == "image") {
+      itemList = that.data.imagesList
+    } else if (e.currentTarget.dataset.type == "video") {
+      itemList = that.data.videosList
+    }
+    for (var i = 0; i < itemList.length; i++) {
+      if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+        itemList.splice(i, 1)
+        if (e.currentTarget.dataset.type == "image") {
+          console.log("item", itemList)
+          that.setData({
+            imagesList: itemList
+          })
+        } else if (e.currentTarget.dataset.type == "video") {
+          that.setData({
+            videosList: itemList
+          })
+        }
         break
       }
     }
