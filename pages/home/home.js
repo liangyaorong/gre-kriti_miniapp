@@ -2,6 +2,9 @@
 
 var images = require("../../data/Post_data.js")
 var videos = require("../../data/Video_data.js")
+var query = require('../../utils/query.js');
+
+var app = getApp()
 
 
 Page({
@@ -40,62 +43,46 @@ Page({
     headerImageUrl: 'https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=109e35ebacec08fa320d1bf538875608/95eef01f3a292df507633d41b0315c6035a873c6.jpg',
   },
 
+  //上拉加载更多
+  onReachBottom: function() {
+    var that = this;
+    // 显示加载图标
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    // 图片
+    if (that.data.currentTab == 0) {
+      // 页数+1
+      that.setData({
+        iamgePage: that.data.iamgePage + 1
+      })
+      console.log("当前页：" + that.data.iamgePage)
+      query.queryImage(that, "all", that.data.iamgePage, "all", false, true, false, 'all')
+    } else {
+      that.setData({
+        videoPage: that.data.videoPage + 1
+      })
+      console.log("当前页：" + that.data.videoPage)
+      query.queryVideo(that, "all", that.data.videoPage, "all", false, true, false, 'all')
+    }
+    wx.hideLoading();
+  },
+
+
+
+
+
   // 获取视频列表数据
   getImagesList() {
     let that = this;
-
-    wx.request({
-      url: 'https://videos.taouu.cn/home/stream',
-      data: {
-        "wx_open_id": "all",
-        'page': 0,
-        "page_size": "20",
-        "label": "all",
-        "is_like_inverted": false,
-        "is_time_inverted": true,
-        "is_user_id_filter": false,
-        "select_type": "picture",
-        "select_check": "all"
-      },
-      method: 'GET',
-      header: {},
-      success: function(res) {
-        console.log(res)
-        that.setData({
-          "imagesList": res.data,
-          "imgPage": 0
-        })
-      }
-    })
+    query.queryImage(that, "all", 0, "all", false, true, false, 'all')
   },
 
   // 获取视频列表数据
   getVideosList() {
     let that = this;
-    wx.request({
-      url: 'https://videos.taouu.cn/home/stream',
-      data: {
-        "wx_open_id": "all",
-        'page': 0,
-        "page_size": "20",
-        "label": "%",
-        "is_like_inverted": false,
-        "is_time_inverted": true,
-        "is_user_id_filter": false,
-        "select_type": "video",
-        "select_check": "all"
-      },
-      method: 'GET',
-      header: {},
-      success: function(res) {
-        console.log(res)
-        that.setData({
-          "videosList": res.data,
-          "videoPage": 0
-        })
-      }
-    })
-
+    query.queryVideo(that, "all", 0, "all", false, true, false, 'all')
   },
 
   /**
@@ -108,53 +95,22 @@ Page({
 
   // 下拉刷新
   onPullDownRefresh: function() {
+    var that = this
     console.log("下拉加载中。。。")
     wx.showNavigationBarLoading();
-    this.onLoad()
+
+    if (that.data.currentTab == '0') {
+      this.getImagesList();
+    } else {
+      this.getVideosList();
+    }
+
     wx.hideNavigationBarLoading();
     wx.stopPullDownRefresh();
   },
 
-  // //上拉加载更多
-  // onReachBottom: function () {
-  //   console.log("上拉加载中。。。")
-  //   var _this = this;
-  //   // 显示加载图标
-  //   wx.showLoading({
-  //     title: '加载中',
-  //   })
 
-  //   // 图片
-  //   if (_this.data.currentTab == 0) {
-  //     // 页数+1
-  //     _this.data.imgPage += 1;
-  //     console.log("当前页：" + _this.data.imgPage)
-  //     wx.request({
-  //       url: 'https://videos.taouu.cn/home/stream',
-  //       data: {
-  //         "wx_id": "%",
-  //         'page': imgPage,
-  //         "page_size": "20",
-  //         "label": "%",
-  //         "is_like_inverted": false,
-  //         "is_time_inverted": true,
-  //         "is_user_id_filter": true,
-  //         "select_type": "image",
-  //         "select_check": "通过审核"
-  //       },
-  //       method: 'GET',
-  //       header: {},
-  //       success: function (res) {
-  //         console.log(res)
-  //         _this.setData({
-  //           "imagesList": res.data.info,
-  //           "imgPage": imgPage
-  //         })
-  //       }
-  //     })
-  //   } 
-  //   wx.hideLoading();
-  // },
+
 
 
   //顶部tab切换
@@ -245,7 +201,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    var that = this
+    if (this.data.currentTab == '0') {
+      this.getImagesList();
+    } else {
+      this.getVideosList();
+    }
   },
 
   /**

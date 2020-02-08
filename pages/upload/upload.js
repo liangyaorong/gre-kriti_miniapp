@@ -164,23 +164,53 @@ Page({
 
   // 初始化加载
   onLoad: function(options) {
-    this.setData({
-      currentTab: options.index,
-      currentIndexNav: '0',
+    if (app.globalData.openId == '' ) {
+      this.getOpenId()
+    }
+    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
+      this.goLogin();
+    }
+  },
 
-      //上传视频模块
-      upVideoArr: [], //存视频
-      maxVideoUploadLen: 1, //限制上传数量
-      upVideoPathLen: 0,
+  goLogin: function () {
+    wx.navigateTo({
+      url: '/pages/login/login',
+    });
+    console.log("openId", app.globalData.openId)
+  },
 
-      //上传图片
-      upImgArr: [], //存图片
-      maxImageUploadLen: 9, //限制上传数量
-      upImagePathLen: 0,
-
-      // 控制是否显示上传按钮
-      upVideoFilesBtn: true,
-      upImageFilesBtn: true,
+  getOpenId: function () {
+    var that = this;
+    wx.login({
+      success: function (res) {
+        console.log("code", res.code)
+        wx.request({
+          //获取openid接口  
+          url: 'https://videos.taouu.cn/login/regist',
+          data: {
+            js_code: res.code,
+          },
+          method: 'GET',
+          success: function (res) {
+            console.log(res)
+            app.globalData.openId = res.data.openid
+            app.globalData.sessionKey = res.data.session_key
+            if (res.data.user == null) {
+              app.globalData.nickName = ''
+              app.globalData.avatarUrl = ''
+              app.globalData.phoneNumber = ''
+              app.globalData.isAdmin = false
+            } else {
+              app.globalData.nickName = res.data.user.wxName
+              app.globalData.avatarUrl = res.data.user.wxHeadUrl
+              // app.globalData.phoneNumber = res.data.user.phone
+              // app.globalData.isAdmin = res.data.user.isAdmin
+              app.globalData.phoneNumber = ''
+              app.globalData.isAdmin = true
+            }
+          }
+        })
+      }
     })
   },
 
@@ -200,4 +230,69 @@ Page({
     })
   },
 
+
+  /**
+     * 生命周期函数--监听页面显示
+     */
+  onShow: function () {
+    var that = this
+    that.setData({
+      nickName: app.globalData.nickName,
+      avatarUrl: app.globalData.avatarUrl,
+      isAdmin: app.globalData.isAdmin,
+      phone: app.globalData.phoneNumber
+    })
+
+    // 没登陆的，先转跳登陆页面
+    if (app.globalData.openId == '') {
+      this.getOpenId()
+    }
+    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
+      this.goLogin();
+    }
+  },
+
+
+  goLogin: function () {
+    wx.navigateTo({
+      url: '/pages/login/login',
+    });
+    console.log("openId", app.globalData.openId)
+  },
+
+  getOpenId: function () {
+    var that = this;
+    wx.login({
+      success: function (res) {
+        console.log("code", res.code)
+        wx.request({
+          //获取openid接口  
+          url: 'https://videos.taouu.cn/login/regist',
+          data: {
+            js_code: res.code,
+          },
+          method: 'GET',
+          success: function (res) {
+            console.log(res)
+            app.globalData.openId = res.data.openid
+            app.globalData.sessionKey = res.data.session_key
+            if (res.data.user == null) {
+              app.globalData.nickName = ''
+              app.globalData.avatarUrl = ''
+              app.globalData.phoneNumber = ''
+              app.globalData.isAdmin = false
+            } else {
+              app.globalData.nickName = res.data.user.wxName
+              app.globalData.avatarUrl = res.data.user.wxHeadUrl
+              // app.globalData.phoneNumber = res.data.user.phone
+              // app.globalData.isAdmin = res.data.user.isAdmin
+              app.globalData.phoneNumber = ''
+              app.globalData.isAdmin = true
+            }
+          }
+        })
+      }
+    })
+  }
 })
+

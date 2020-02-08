@@ -164,80 +164,9 @@ var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
 
 }
 
-var upFilesFun = (t, uploadUrl, filesPath, formatData) => {
-  let _this = t;
-  var startIndex = 0;
-  var successNumber = 0;
-  var failNumber = 0;
-
-  if (filesPath.length == 0) {
-    return;
-  }
-  const uploadTask = wx.uploadFile({
-    url: uploadUrl,
-    filePath: filesPath[startIndex],
-    name: 'file',
-    formData: formData,
-
-    success: function(res) {
-      var data = res.data
-      successNumber++;
-      // console.log('success', successNumber)
-      // console.log('success',res)
-      // 把后台返回的地址链接存到一个数组
-      let uploaded = t.data.uploadedPathArr || [];
-      var da = JSON.parse(res.data);
-      // console.log(da)
-      if (da.code == 1001) {
-        // ### 此处可能需要修改 以获取图片路径
-        uploaded.push(da.data)
-
-        t.setData({
-          uploadedPathArr: uploaded
-        })
-      }
-    },
-    fail: function(res) {
-      failNumber++;
-      // console.log('fail', filesPath[startIndex])
-      // console.log('failstartIndex',startIndex)
-      // console.log('fail', failNumber)
-      // console.log('fail', res)
-    },
-    complete: function(res) {
-
-      if (startIndex == filesPath.length - 1) {
-        // console.log('completeNumber', startIndex)
-        // console.log('over',res)
-        let sucPathArr = t.data.uploadedPathArr;
-        t.setData({
-          uploadedPathArr: []
-        })
-        console.log('成功：' + successNumber + " 失败：" + failNumber)
-      } else {
-        startIndex++;
-        // console.log(startIndex)
-        upFilesFun(t, uploadUrl, filesPath, formatData);
-      }
-    }
-  })
-
-  uploadTask.onProgressUpdate((res) => {
-    res['index'] = startIndex;
-    // console.log(typeof (progress));
-    // if (typeof(progress) == 'function') {
-    //   progress(res);
-    // }
-    console.log('上传进度', res.progress)
-    console.log('已经上传的数据长度', res.totalBytesSent)
-    console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-  })
-
-}
 module.exports = {
   chooseImage,
   chooseVideo,
-  upFilesFun,
   getPathArr,
   multiPicSubmit
 }

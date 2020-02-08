@@ -10,7 +10,7 @@
     </view>
 
     <view hidden="{{phone != ''}}"  class= 'shenhe'>
-      <button open-type='getPhomeNumber' bindgetphonenumber="getPhomeNumber" type='primary'>留下电话号码吧，可能有奖品发送哦</button>
+      <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" type='primary'>留下电话号码吧，可能有奖品发送哦</button>
     </view>
   </view>
 

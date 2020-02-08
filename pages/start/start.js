@@ -19,10 +19,9 @@ Page({
       url: '/pages/login/login',
     });
     console.log("openId", app.globalData.openId)
-
   },
 
-  login: function () {
+  enter: function () {
     if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
       this.goLogin();
     } else {
@@ -68,8 +67,6 @@ Page({
 
   onLoad: function() {
     this.getOpenId();
-
-
   },
 
 

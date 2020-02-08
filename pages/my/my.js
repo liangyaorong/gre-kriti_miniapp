@@ -1,7 +1,5 @@
 var images = require("../../data/Post_data.js")
 var videos = require("../../data/Video_data.js")
-const APP_ID = 'wx18e21e713bbcc342';//输入小程序appid  
-const APP_SECRET = '26c587ff952331daac5480ee61572df9';//输入小程序
 var app = getApp()
 
 Page({
@@ -48,18 +46,58 @@ Page({
      * 生命周期函数--监听页面加载
      */
   onLoad: function (options) {
+    console.log("我的页面data", this.data)
+   
+
     this.getImagesList();
     var that = this
     console.log("nikename", app.globalData)
-    that.setData({
-      nickName: app.globalData.nickName,
-      avatarUrl: app.globalData.avatarUrl,
-      isAdmin: app.globalData.isAdmin,
-      phone: app.globalData.phoneNumber
-    })
+ 
     console.log("nickname", that.data)
 
 
+  },
+
+  goLogin: function () {
+    wx.navigateTo({
+      url: '/pages/login/login',
+    });
+    console.log("openId", app.globalData.openId)
+  },
+
+  getOpenId: function () {
+    var that = this;
+    wx.login({
+      success: function (res) {
+        console.log("code", res.code)
+        wx.request({
+          //获取openid接口  
+          url: 'https://videos.taouu.cn/login/regist',
+          data: {
+            js_code: res.code,
+          },
+          method: 'GET',
+          success: function (res) {
+            console.log(res)
+            app.globalData.openId = res.data.openid
+            app.globalData.sessionKey = res.data.session_key
+            if (res.data.user == null) {
+              app.globalData.nickName = ''
+              app.globalData.avatarUrl = ''
+              app.globalData.phoneNumber = ''
+              app.globalData.isAdmin = false
+            } else {
+              app.globalData.nickName = res.data.user.wxName
+              app.globalData.avatarUrl = res.data.user.wxHeadUrl
+              // app.globalData.phoneNumber = res.data.user.phone
+              // app.globalData.isAdmin = res.data.user.isAdmin
+              app.globalData.phoneNumber = ''
+              app.globalData.isAdmin = true
+            }
+          }
+        })
+      }
+    })
   },
 
 
@@ -241,6 +279,12 @@ Page({
     });
   },
 
+  getPhoneNumber(e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+  },
+
 
 
   /**
@@ -254,7 +298,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
+    that.setData({
+      nickName: app.globalData.nickName,
+      avatarUrl: app.globalData.avatarUrl,
+      isAdmin: app.globalData.isAdmin,
+      phone: app.globalData.phoneNumber
+    })
 
+    // 没登陆的，先转跳登陆页面
+    if (app.globalData.openId == '') {
+      this.getOpenId()
+    }
+    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
+      this.goLogin();
+    }
   },
 
   /**
