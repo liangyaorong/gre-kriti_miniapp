@@ -131,7 +131,7 @@ var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
       console.log('fail', res)
     },
     complete: function(res) {
-      if (uploadIndex == that.data.upImgArr.length - 1) {
+      if (uploadIndex >= that.data.upImgArr.length - 1) {
         console.log("上传完成！")
         wx.hideLoading()
         wx.switchTab({
@@ -143,17 +143,17 @@ var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
     }
   })
 
-  // uploadTask.onProgressUpdate((res) => {
-  //   console.log('上传进度', res.progress)
-  //   console.log('已经上传的数据长度', res.totalBytesSent)
-  //   console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-  // })
+  uploadTask.onProgressUpdate((res) => {
+    console.log('上传进度', res.progress)
+    console.log('已经上传的数据长度', res.totalBytesSent)
+    console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+  })
 
-  // that.setData({
-  //   upImgArr: [],
-  //   upImagePathLen: 0,
-  //   currentIndexNav: 0
-  // })
+  that.setData({
+    upImgArr: [],
+    upImagePathLen: 0,
+    currentIndexNav: 0
+  })
 }
 
 var upFilesFun = (t, uploadUrl, filesPath, formatData) => {
