@@ -1,3 +1,6 @@
+var util = require('util.js');
+
+
 var chooseImage = (t, count) => {
   wx.chooseImage({
     count: count,
@@ -35,6 +38,7 @@ var chooseImage = (t, count) => {
     },
   });
 }
+
 var chooseVideo = (t, count) => {
   wx.chooseVideo({
     sourceType: ['album', 'camera'],
@@ -94,21 +98,63 @@ var getPathArr = t => {
   return filesPathsArr;
 }
 
-/**
- * upFilesFun(this,object)
- * object:{
- *    url     ************   上传路径 (必传)
- *    filesPathsArr  ******  文件路径数组
- *    name           ******  wx.uploadFile name
- *    formData     ******    其他上传的参数
- *    startIndex     ******  开始上传位置 0
- *    successNumber  ******     成功个数
- *    failNumber     ******     失败个数
- *    completeNumber  ******    完成个数
- * }
- * progress:上传进度
- * success：上传完成之后
- */
+var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
+  console.log("上传index", uploadIndex)
+  console.log('图片路径', that.data.upImgArr[uploadIndex].path)
+  console.log('文字', post)
+  console.log('标签', that.data.navList[that.data.currentIndexNav])
+  console.log('时间', util.time(dataTime))
+
+  if (uploadIndex == 0) {
+    wx.showLoading({
+      title: '发表中',
+    })
+  }
+  const uploadTask = wx.uploadFile({
+    url: 'https://videos.taouu.cn/collection/add',
+    filePath: that.data.upImgArr[uploadIndex].path,
+    name: 'file',
+    formData: {
+      'wx_open_id': openId,
+      'type': 'picture',
+      'create_time': util.formatTime(dataTime),
+      'index': uploadIndex,
+      'post': post,
+      'label': that.data.navList[that.data.currentIndexNav],
+      'collection_gid': openId + util.time(dataTime)
+    },
+
+    success: function(res) {
+      console.log('success', res)
+    },
+    fail: function(res) {
+      console.log('fail', res)
+    },
+    complete: function(res) {
+      if (uploadIndex == that.data.upImgArr.length - 1) {
+        console.log("上传完成！")
+        wx.hideLoading()
+        wx.switchTab({
+          url: '../../pages/my/my'
+        })
+      } else {
+        multiPicSubmit(that, openId, uploadIndex + 1, post, dataTime)
+      }
+    }
+  })
+
+  // uploadTask.onProgressUpdate((res) => {
+  //   console.log('上传进度', res.progress)
+  //   console.log('已经上传的数据长度', res.totalBytesSent)
+  //   console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+  // })
+
+  // that.setData({
+  //   upImgArr: [],
+  //   upImagePathLen: 0,
+  //   currentIndexNav: 0
+  // })
+}
 
 var upFilesFun = (t, uploadUrl, filesPath, formatData) => {
   let _this = t;
@@ -184,5 +230,6 @@ module.exports = {
   chooseImage,
   chooseVideo,
   upFilesFun,
-  getPathArr
+  getPathArr,
+  multiPicSubmit
 }

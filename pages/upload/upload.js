@@ -30,6 +30,7 @@ Page({
     upImgArr: [], //存图片
     maxImageUploadLen: 9, //限制上传数量
     upImagePathLen: 0,
+    upImageIndex:0,
 
     // 控制是否显示上传按钮
     upVideoFilesBtn: true,
@@ -37,62 +38,11 @@ Page({
 
   },
 
-  bindFormSubmitPics: function(e) {
-    let that = this;
-    console.log('图片路径', that.data.upImgArr[0].path)
-    console.log('文字', e.detail.value.textarea)
-    console.log('标签', that.data.navList[that.data.currentIndexNav])
-    console.log('时间', util.time(new Date()))
+  bindFormSubmitPics(e) {
+    var that = this;
+    var curIndex = that.data.upImageIndex;
+    upFiles.multiPicSubmit(that, app.globalData.openId, 0, e.detail.value.textarea, new Date())
 
-
-    wx.showLoading({
-      title: '发表中',
-    })
-
-    const uploadTask = wx.uploadFile({
-      url: 'https://videos.taouu.cn/collection/add',
-      filePath: that.data.upImgArr[0].path,
-      name: 'file',
-      formData: {
-        'wx_open_id': app.globalData.openId,
-        'type': 'picture',
-        'create_time': util.formatTime(new Date()),
-        'index': 0,
-        'post': e.detail.value.textarea,
-        'label': that.data.navList[that.data.currentIndexNav],
-        'collection_gid': app.globalData.openId + util.time(new Date())
-      },
-
-      success: function(res) {
-        console.log('success', res)
-      },
-      fail: function(res) {
-        wx.hideLoading()
-        // wx.switchTab({
-        //   url: '../../pages/my/my'
-        // })
-      },
-      complete: function(res) {
-        console.log("上传完成！")
-        wx.hideLoading()
-        wx.switchTab({
-          url: '../../pages/my/my'
-        })
-
-      }
-    })
-
-    uploadTask.onProgressUpdate((res) => {
-      console.log('上传进度', res.progress)
-      console.log('已经上传的数据长度', res.totalBytesSent)
-      console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-    })
-
-    that.setData({
-      upImgArr: [],
-      upImagePathLen: 0,
-      currentIndexNav:0
-    })
   },
 
 
