@@ -86,7 +86,7 @@
           <image src="{{item.wxHeadUrl}}"></image>
           <view class="text-box">
             <view class="arow01">
-              <view class="artist-name">{{item.wxName}}</view>
+              <view class="artist-name">ID: {{item.collectionId}}</view>
             </view>
             <view class="arow">
               <view class="time">{{item.createTime}}</view>

@@ -44,7 +44,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
 
     this.getImagesList();
 
@@ -118,7 +118,7 @@ Page({
 
 
   //顶部tab切换
-  navbarTap: function(e) {
+  navbarTap: function (e) {
     // console.log("data")
     var curIdx = e.currentTarget.dataset.idx
     console.log(curIdx)
@@ -143,7 +143,7 @@ Page({
   },
 
   // 图片预览
-  previewImg: function(e) {
+  previewImg: function (e) {
     var scr = e.currentTarget.dataset.scr;
     var scrlist = e.currentTarget.dataset.scrlist;
     wx.previewImage({
@@ -151,100 +151,128 @@ Page({
       //当前图片地址
       urls: scrlist,
       //所有要预览的图片的地址集合 数组形式
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
 
-  pass: function(e) {
-    console.log('审核通过', e.currentTarget.dataset.collectionid)
-    console.log('类型', e.currentTarget.dataset.type)
-
+  pass: function (e) {
     var that = this
-    var itemList = []
-    if (e.currentTarget.dataset.type == "image") {
-      itemList = that.data.imagesList
-    } else if (e.currentTarget.dataset.type == "video") {
-      itemList = that.data.videosList
-    }
-    for (var i = 0; i < itemList.length; i++) {
-      if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
-        itemList.splice(i, 1)
+    wx.request({
+      url: 'https://videos.taouu.cn/check/pass',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        wx_open_id: app.globalData.openId,
+        id: e.currentTarget.dataset.collectionid,
+        passed: true
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log("审核通过", res)
+
+        var itemList = []
         if (e.currentTarget.dataset.type == "image") {
-          console.log("item", itemList)
-          that.setData({
-            imagesList: itemList
-          })
+          itemList = that.data.imagesList
         } else if (e.currentTarget.dataset.type == "video") {
-          that.setData({
-            videosList: itemList
-          })
+          itemList = that.data.videosList
         }
-        break
+        for (var i = 0; i < itemList.length; i++) {
+          if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+            itemList.splice(i, 1)
+            if (e.currentTarget.dataset.type == "image") {
+              that.setData({
+                imagesList: itemList
+              })
+            } else if (e.currentTarget.dataset.type == "video") {
+              that.setData({
+                videosList: itemList
+              })
+            }
+            break
+          }
+        }
       }
-    }
+    })
   },
 
-  notPass: function(e) {
-    console.log('审核不通过', e.currentTarget.dataset.collectionid)
+  notPass: function (e) {
     var that = this
-    var itemList = []
-    if (e.currentTarget.dataset.type == "image") {
-      itemList = that.data.imagesList
-    } else if (e.currentTarget.dataset.type == "video") {
-      itemList = that.data.videosList
-    }
-    for (var i = 0; i < itemList.length; i++) {
-      if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
-        itemList.splice(i, 1)
+    console.log('审核不通过', e.currentTarget.dataset.collectionid)
+    wx.request({
+      url: 'https://videos.taouu.cn/check/pass',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        wx_open_id: app.globalData.openId,
+        id: e.currentTarget.dataset.collectionid,
+        passed: false
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log("审核不通过", res)
+
+        var itemList = []
         if (e.currentTarget.dataset.type == "image") {
-          console.log("item", itemList)
-          that.setData({
-            imagesList: itemList
-          })
+          itemList = that.data.imagesList
         } else if (e.currentTarget.dataset.type == "video") {
-          that.setData({
-            videosList: itemList
-          })
+          itemList = that.data.videosList
         }
-        break
+        for (var i = 0; i < itemList.length; i++) {
+          if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+            itemList.splice(i, 1)
+            if (e.currentTarget.dataset.type == "image") {
+              console.log("item", itemList)
+              that.setData({
+                imagesList: itemList
+              })
+            } else if (e.currentTarget.dataset.type == "video") {
+              that.setData({
+                videosList: itemList
+              })
+            }
+            break
+          }
+        }
       }
-    }
+    })
   },
 
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.getImagesList();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

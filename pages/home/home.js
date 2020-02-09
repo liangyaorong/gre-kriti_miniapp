@@ -41,6 +41,9 @@ Page({
     // 按点赞倒排
     likeReverse: false,
 
+    // 搜索模式，上拉无效
+    searchMode: false,
+
     //头图数据
     headerImageUrl: 'https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=109e35ebacec08fa320d1bf538875608/95eef01f3a292df507633d41b0315c6035a873c6.jpg',
   },
@@ -58,38 +61,41 @@ Page({
   //上拉加载更多
   onReachBottom: function() {
     let that = this;
-    var label = that.data.navList[that.data.currentIndexNav];
-    if (that.data.currentIndexNav == 0) {
-      label = 'all'
-    }
-    // 显示加载图标
-    wx.showLoading({
-      title: '加载中',
-    })
 
-    if (that.data.currentTab == 0) {
-      query.queryImage(that,
-        app.globalData.openId,
-        that.data.imagePage + 1,
-        label,
-        that.data.likeReverse,
-        that.data.timeReverse,
-        false,
-        'passed'
-      )
-    } else {
-      query.queryVideo(
-        app.globalData.openId,
-        app.globalData.openId,
-        that.data.videoPage + 1,
-        label,
-        that.data.likeReverse,
-        that.data.timeReverse,
-        false,
-        'passed'
-      )
+    if (!that.data.searchMode) {
+      var label = that.data.navList[that.data.currentIndexNav];
+      if (that.data.currentIndexNav == 0) {
+        label = 'all'
+      }
+      // 显示加载图标
+      wx.showLoading({
+        title: '加载中',
+      })
+
+      if (that.data.currentTab == 0) {
+        query.queryImage(that,
+          app.globalData.openId,
+          that.data.imagePage + 1,
+          label,
+          that.data.likeReverse,
+          that.data.timeReverse,
+          false,
+          'passed'
+        )
+      } else {
+        query.queryVideo(
+          app.globalData.openId,
+          app.globalData.openId,
+          that.data.videoPage + 1,
+          label,
+          that.data.likeReverse,
+          that.data.timeReverse,
+          false,
+          'passed'
+        )
+      }
+      wx.hideLoading();
     }
-    wx.hideLoading();
   },
 
 
@@ -221,10 +227,8 @@ Page({
             } else {
               app.globalData.nickName = res.data.user.wxName
               app.globalData.avatarUrl = res.data.user.wxHeadUrl
-              // app.globalData.phoneNumber = res.data.user.phone
-              // app.globalData.isAdmin = res.data.user.isAdmin
-              app.globalData.phoneNumber = ''
-              app.globalData.isAdmin = true
+              app.globalData.phoneNumber = res.data.user.phone
+              app.globalData.isAdmin = res.data.user.isAdmin
             }
           }
         })
@@ -250,42 +254,39 @@ Page({
       method: 'POST',
       success: function (res) {
         console.log("播放成功", res)
+
+        var itemList = []
+        if (e.currentTarget.dataset.type == "image") {
+          itemList = that.data.imagesList
+        } else if (e.currentTarget.dataset.type == "video") {
+          itemList = that.data.videosList
+        }
+        for (var i = 0; i < itemList.length; i++) {
+          if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+            itemList[i].playCount += 1
+            if (e.currentTarget.dataset.type == "image") {
+              console.log("item", itemList)
+              that.setData({
+                imagesList: itemList
+              })
+            } else if (e.currentTarget.dataset.type == "video") {
+              that.setData({
+                videosList: itemList
+              })
+            }
+            break
+          }
+        }
       }
     })
 
-    var itemList = []
-    if (e.currentTarget.dataset.type == "image") {
-      itemList = that.data.imagesList
-    } else if (e.currentTarget.dataset.type == "video") {
-      itemList = that.data.videosList
-    }
-    for (var i = 0; i < itemList.length; i++) {
-      if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
-        itemList[i].playCount += 1
-        if (e.currentTarget.dataset.type == "image") {
-          console.log("item", itemList)
-          that.setData({
-            imagesList: itemList
-          })
-        } else if (e.currentTarget.dataset.type == "video") {
-          that.setData({
-            videosList: itemList
-          })
-        }
-        break
-      }
-    }
+    
   },
 
 
 
   like: function (e) {
     var that = this
-
-    console.log("点赞openid", app.globalData.openId)
-    console.log("点赞id", e.currentTarget.dataset.collectionid)
-    console.log('类型', e.currentTarget.dataset.type)
-
     wx.request({  
       url: 'https://videos.taouu.cn/collection/addlike',
       header: {
@@ -298,32 +299,33 @@ Page({
       method: 'POST',
       success: function (res) {
         console.log("点赞成功", res)
+        var itemList = []
+        if (e.currentTarget.dataset.type == "image") {
+          itemList = that.data.imagesList
+        } else if (e.currentTarget.dataset.type == "video") {
+          itemList = that.data.videosList
+        }
+        for (var i = 0; i < itemList.length; i++) {
+          if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+            itemList[i].isCurrentUserLiked = true
+            itemList[i].likeCount += 1
+            if (e.currentTarget.dataset.type == "image") {
+              console.log("item", itemList)
+              that.setData({
+                imagesList: itemList
+              })
+            } else if (e.currentTarget.dataset.type == "video") {
+              that.setData({
+                videosList: itemList
+              })
+            }
+            break
+          }
+        }
       }
     })
 
-    var itemList = []
-    if (e.currentTarget.dataset.type == "image") {
-      itemList = that.data.imagesList
-    } else if (e.currentTarget.dataset.type == "video") {
-      itemList = that.data.videosList
-    }
-    for (var i = 0; i < itemList.length; i++) {
-      if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
-        itemList[i].isCurrentUserLiked = true
-        itemList[i].likeCount += 1
-        if (e.currentTarget.dataset.type == "image") {
-          console.log("item", itemList)
-          that.setData({
-            imagesList: itemList
-          })
-        } else if (e.currentTarget.dataset.type == "video") {
-          that.setData({
-            videosList: itemList
-          })
-        }
-        break
-      }
-    }
+    
 
   },
 
@@ -354,17 +356,48 @@ Page({
       searchstr: e.detail.value
     })
   },
+
   //搜索回调
   endsearchList(e) {
+    var that = this
+    that.setData({
+      searchMode: true
+    })
+
     console.log('查询数据')
-    console.log(this.data.searchstr)
+    console.log(that.data.searchstr)
+
+
+    wx.request({
+      //获取openid接口  
+      url: 'https://videos.taouu.cn/collection/get',
+      data: {
+        collection_id: that.data.searchstr,
+        wx_open_id:app.globalData.openId
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data.type)
+        if (res.data.type == "picture") {
+          that.setData({
+            imagesList: [res.data]
+          })
+        } else if (res.data.type == "video"){
+          that.setData({
+            videosList: [res.data]
+          })
+        }
+      }
+    })
 
   },
   // 取消搜索
   cancelsearch() {
     this.setData({
-      searchstr: ''
+      searchstr: '',
+      searchMode: false
     })
+
   },
   //清空搜索框
   activity_clear(e) {

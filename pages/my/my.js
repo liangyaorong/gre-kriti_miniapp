@@ -77,10 +77,8 @@ Page({
             } else {
               app.globalData.nickName = res.data.user.wxName
               app.globalData.avatarUrl = res.data.user.wxHeadUrl
-              // app.globalData.phoneNumber = res.data.user.phone
-              // app.globalData.isAdmin = res.data.user.isAdmin
-              app.globalData.phoneNumber = ''
-              app.globalData.isAdmin = true
+              app.globalData.phoneNumber = res.data.user.phone
+              app.globalData.isAdmin = res.data.user.isAdmin
             }
           }
         })
