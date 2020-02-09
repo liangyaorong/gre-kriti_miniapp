@@ -380,17 +380,24 @@ Page({
       },
       method: 'GET',
       success: function(res) {
-        console.log(res.data.type)
-        if (res.data.type == "picture") {
-          that.setData({
-            imagesList: [res.data],
-            currentTab: 0
+        console.log(res)
+        if (res.data == '' || res.statusCode == 500) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '您搜索的内容暂未通过审核'
           })
-        } else if (res.data.type == "video") {
-          that.setData({
-            videosList: [res.data],
-            currentTab: 1
-          })
+        } else {
+          if (res.data.type == "picture") {
+            that.setData({
+              imagesList: [res.data],
+              currentTab: 0
+            })
+          } else if (res.data.type == "video") {
+            that.setData({
+              videosList: [res.data],
+              currentTab: 1
+            })
+          }
         }
       }
     })
