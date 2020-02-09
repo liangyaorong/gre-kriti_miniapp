@@ -1,8 +1,8 @@
 var images = require("../../data/Post_data.js")
 var videos = require("../../data/Video_data.js")
-const APP_ID = 'wx18e21e713bbcc342'; //输入小程序appid  
-const APP_SECRET = '26c587ff952331daac5480ee61572df9'; //输入小程序
-var app = getApp().globalData.userInfo
+var query = require('../../utils/query.js');
+
+var app = getApp()
 
 Page({
 
@@ -12,7 +12,7 @@ Page({
   data: {
     inputShowed: false, //初始文本框不显示内容
 
-    iamgePage: 0,
+    imagePage: 0,
     videoPage: 0,
 
     // 顶部菜单切换
@@ -45,131 +45,76 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
     this.getImagesList();
 
   },
 
 
 
-  // // 下拉刷新
-  // onPullDownRefresh: function () {
-  //   console.log("下拉加载中。。。")
-  //   wx.showNavigationBarLoading();
-  //   this.onLoad()
-  //   wx.hideNavigationBarLoading();
-  //   wx.stopPullDownRefresh();
-  // },
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    var that = this
+    console.log("下拉加载中。。。")
+    wx.showNavigationBarLoading();
 
-  // //上拉加载更多
-  // onReachBottom: function () {
-  //   console.log("上拉加载中。。。")
-  //   var _this = this;
-  //   // 显示加载图标
-  //   wx.showLoading({
-  //     title: '加载中',
-  //   })
+    if (that.data.currentTab == '0') {
+      this.getImagesList();
+    } else {
+      this.getVideosList();
+    }
 
-  //   // 图片
-  //   if (_this.data.currentTab == 0) {
-  //     // 页数+1
-  //     _this.data.imgPage += 1;
-  //     console.log("当前页：" + _this.data.imgPage)
-  //     wx.request({
-  //       url: 'https://videos.taouu.cn/home/stream',
-  //       data: {
-  //         "wx_id": "%",
-  //         'page': imgPage,
-  //         "page_size": "20",
-  //         "label": "%",
-  //         "is_like_inverted": false,
-  //         "is_time_inverted": true,
-  //         "is_user_id_filter": true,
-  //         "select_type": "image",
-  //         "select_check": "通过审核"
-  //       },
-  //       method: 'GET',
-  //       header: {},
-  //       success: function (res) {
-  //         console.log(res)
-  //         _this.setData({
-  //           "imagesList": res.data.info,
-  //           "imgPage": imgPage
-  //         })
-  //       }
-  //     })
-  //   } 
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
+  },
 
-  //   wx.hideLoading();
-  // },
+  onReachBottom: function () {
+    let that = this;
+    // 显示加载图标
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    if (that.data.currentTab == 0) {
+      console.log("当前页：" + that.data.imagePage)
+      query.queryImage(that,
+        app.globalData.openId,
+        that.data.imagePage + 1,
+        "all",
+        false,
+        true,
+        false,
+        'all'
+      )
+    } else {
+
+      console.log("当前页：" + that.data.videoPage)
+      query.queryVideo(
+        that,
+        app.globalData.openId,
+        that.data.videoPage + 1,
+        "all",
+        false,
+        true,
+        false,
+        'all'
+      )
+    }
+    wx.hideLoading();
+  },
 
   // 获取视频列表数据
   getImagesList() {
     let that = this;
-    // wx.request({
-    //   url: 'https://videos.taouu.cn/home/stream',
-    //   data: {
-    //     "wx_id": "%",
-    //     'page':0,
-    //     "page_size": "20",
-    //     "label":"%",
-    //     "is_like_inverted": false,
-    //     "is_time_inverted": true,
-    //     "is_user_id_filter":true,
-    //     "select_type":"all",
-    //     "select_check":"all"
-    //   },
-    //   method: 'GET',
-    //   header: {},
-    //   success: function (res) {
-    //     console.log(res)
-    //     that.setData({
-    //       "imagesList": res.data.info,
-    //       "imgPage": 0
-    //     })
-    //   }
-    // })
-
-    that.setData({
-      imagesList: images.homeIndex,
-      iamgePage: 0
-    })
-
-
+    query.queryImage(that, "all", 0, "all", false, true, false, 'all')
   },
 
   // 获取视频列表数据
   getVideosList() {
     let that = this;
-    // wx.request({
-    //   url: 'https://videos.taouu.cn/home/stream',
-    //   data: {
-    //     "wx_id": "%",
-    //     'page': 0,
-    //     "page_size": "20",
-    //     "label": "%",
-    //     "is_like_inverted": false,
-    //     "is_time_inverted": true,
-    //     "is_user_id_filter": true,
-    //     "select_type": "all",
-    //     "select_check": "all"
-    //   },
-    //   method: 'GET',
-    //   header: {},
-    //   success: function (res) {
-    //     console.log(res)
-    //     that.setData({
-    //       "posts": res.data.info,
-    //       "imgPage": 0
-    //     })
-    //   }
-    // })
-
-    that.setData({
-      videosList: videos.homeIndex,
-      videoPage: 0
-    })
-
+    query.queryVideo(that, "all", 0, "all", false, true, false, 'all')
   },
+
 
 
   //顶部tab切换
@@ -280,7 +225,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getImagesList();
   },
 
   /**

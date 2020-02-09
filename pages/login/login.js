@@ -10,6 +10,8 @@ Page({
    */
   data: {
 
+    toHome: false
+
   },
 
 
@@ -39,21 +41,27 @@ Page({
         app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
       }
     })
-    this.goHome();
-  },
 
-  goHome: function () {
-    wx.switchTab({
-      url: '/pages/home/home',
-    });
-    console.log("openId", app.globalData.openId)
+    if (that.data.toHome) {
+      wx.switchTab({
+        url: '/pages/home/home',
+      });
+    } else {
+      wx.navigateBack({
+        delta: 1 //跳转的级数
+      })
+    }
+  
   },
 
   /**
      * 生命周期函数--监听页面加载
      */
   onLoad: function (options) {
-
+    var that = this 
+    if (options.tohome) {
+      that.data.toHome = true
+    }
   },
 
 
@@ -67,7 +75,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function (options) {
 
   },
 

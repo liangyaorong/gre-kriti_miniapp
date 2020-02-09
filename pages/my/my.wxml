@@ -10,7 +10,7 @@
     </view>
 
     <view hidden="{{phone != ''}}"  class= 'shenhe'>
-      <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" type='primary'>留下电话号码吧，可能有奖品发送哦</button>
+      <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" type='primary'> 授权手机号,参与活动吧</button>
     </view>
   </view>
 
@@ -33,7 +33,7 @@
           <image src="{{item.wxHeadUrl}}"></image>
           <view class="text-box">
             <view class="arow01">
-              <view class="artist-name">{{item.wxName}}</view>
+              <view class="artist-name">ID: {{item.collectionId}}</view>
             </view>
             <view class="arow">
               <view class="time">{{item.createTime}}</view>

@@ -133,11 +133,6 @@ var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
       console.log('fail', res)
     },
     complete: function(res) {
-      console.log("当前index", uploadIndex)
-      console.log("一共的index数", that.data.upImgArr.length - 1)
-      console.log("是否继续上传", uploadIndex >= that.data.upImgArr.length - 1)
-
-
       if (uploadIndex >= that.data.upImgArr.length - 1) {
         console.log("上传完成！")
         wx.hideLoading()

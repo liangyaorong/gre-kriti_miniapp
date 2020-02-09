@@ -1,5 +1,7 @@
 var images = require("../../data/Post_data.js")
 var videos = require("../../data/Video_data.js")
+var query = require('../../utils/query.js');
+
 var app = getApp()
 
 Page({
@@ -10,7 +12,7 @@ Page({
   data: {
     inputShowed: false,  //初始文本框不显示内容
 
-    iamgePage: 0,
+    imagePage: 0,
     videoPage: 0,
 
     // 顶部菜单切换
@@ -47,23 +49,9 @@ Page({
      */
   onLoad: function (options) {
     console.log("我的页面data", this.data)
-   
-
     this.getImagesList();
-    var that = this
-    console.log("nikename", app.globalData)
- 
-    console.log("nickname", that.data)
-
-
   },
 
-  goLogin: function () {
-    wx.navigateTo({
-      url: '/pages/login/login',
-    });
-    console.log("openId", app.globalData.openId)
-  },
 
   getOpenId: function () {
     var that = this;
@@ -102,123 +90,70 @@ Page({
 
 
 
-  // // 下拉刷新
-  // onPullDownRefresh: function () {
-  //   console.log("下拉加载中。。。")
-  //   wx.showNavigationBarLoading();
-  //   this.onLoad()
-  //   wx.hideNavigationBarLoading();
-  //   wx.stopPullDownRefresh();
-  // },
 
-  // //上拉加载更多
-  // onReachBottom: function () {
-  //   console.log("上拉加载中。。。")
-  //   var _this = this;
-  //   // 显示加载图标
-  //   wx.showLoading({
-  //     title: '加载中',
-  //   })
-
-  //   // 图片
-  //   if (_this.data.currentTab == 0) {
-  //     // 页数+1
-  //     _this.data.imgPage += 1;
-  //     console.log("当前页：" + _this.data.imgPage)
-  //     wx.request({
-  //       url: 'https://videos.taouu.cn/home/stream',
-  //       data: {
-  //         "wx_id": "%",
-  //         'page': imgPage,
-  //         "page_size": "20",
-  //         "label": "%",
-  //         "is_like_inverted": false,
-  //         "is_time_inverted": true,
-  //         "is_user_id_filter": true,
-  //         "select_type": "image",
-  //         "select_check": "通过审核"
-  //       },
-  //       method: 'GET',
-  //       header: {},
-  //       success: function (res) {
-  //         console.log(res)
-  //         _this.setData({
-  //           "imagesList": res.data.info,
-  //           "imgPage": imgPage
-  //         })
-  //       }
-  //     })
-  //   } 
-
-  //   wx.hideLoading();
-  // },
-
-  // 获取视频列表数据
-  getImagesList() {
+  //上拉加载更多
+  onReachBottom: function () {
     let that = this;
-    // wx.request({
-    //   url: 'https://videos.taouu.cn/home/stream',
-    //   data: {
-    //     "wx_id": "%",
-    //     'page':0,
-    //     "page_size": "20",
-    //     "label":"%",
-    //     "is_like_inverted": false,
-    //     "is_time_inverted": true,
-    //     "is_user_id_filter":true,
-    //     "select_type":"all",
-    //     "select_check":"all"
-    //   },
-    //   method: 'GET',
-    //   header: {},
-    //   success: function (res) {
-    //     console.log(res)
-    //     that.setData({
-    //       "imagesList": res.data.info,
-    //       "imgPage": 0
-    //     })
-    //   }
-    // })
-
-    that.setData({
-      imagesList: images.homeIndex,
-      iamgePage: 0
+    // 显示加载图标
+    wx.showLoading({
+      title: '加载中',
     })
 
+    if (that.data.currentTab == 0) {
+      console.log("当前页：" + that.data.imagePage)
+      query.queryImage(
+        that, 
+        app.globalData.openId, 
+        that.data.imagePage + 1, 
+        "all", 
+        false, 
+        true, 
+        true, 
+        'all'
+        )
+    } else {
+      console.log("当前页：" + that.data.videoPage)
+      query.queryVideo(
+        that, 
+        app.globalData.openId, 
+        that.data.videoPage + 1, 
+        "all", 
+        false, 
+        true, 
+        true, 
+        'all'
+        )
+    }
+    wx.hideLoading();
+  },
+
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    var that = this
+    console.log("下拉加载中。。。")
+    wx.showNavigationBarLoading();
+
+    if (that.data.currentTab == '0') {
+      this.getImagesList();
+    } else {
+      this.getVideosList();
+    }
+
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
+  },
+
+  // 获取视频列表数据
+  
+  getImagesList() {
+    let that = this;
+    query.queryImage(that, app.globalData.openId, 0, "all", false, true, true, 'all')
   },
 
   // 获取视频列表数据
   getVideosList() {
     let that = this;
-    // wx.request({
-    //   url: 'https://videos.taouu.cn/home/stream',
-    //   data: {
-    //     "wx_id": "%",
-    //     'page': 0,
-    //     "page_size": "20",
-    //     "label": "%",
-    //     "is_like_inverted": false,
-    //     "is_time_inverted": true,
-    //     "is_user_id_filter": true,
-    //     "select_type": "all",
-    //     "select_check": "all"
-    //   },
-    //   method: 'GET',
-    //   header: {},
-    //   success: function (res) {
-    //     console.log(res)
-    //     that.setData({
-    //       "posts": res.data.info,
-    //       "imgPage": 0
-    //     })
-    //   }
-    // })
-
-    that.setData({
-      videosList: videos.homeIndex,
-      videoPage: 0
-    })
-
+    query.queryVideo(that, app.globalData.openId,  0, "all", false, true, true, 'all')
   },
 
 
@@ -298,6 +233,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+    // 没登陆的，先转跳登陆页面
+    if (app.globalData.openId == '') {
+      this.getOpenId()
+    }
+    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      });
+    }
+
     var that = this
     that.setData({
       nickName: app.globalData.nickName,
@@ -306,12 +252,10 @@ Page({
       phone: app.globalData.phoneNumber
     })
 
-    // 没登陆的，先转跳登陆页面
-    if (app.globalData.openId == '') {
-      this.getOpenId()
-    }
-    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
-      this.goLogin();
+    if (this.data.currentTab == '0') {
+      this.getImagesList();
+    } else {
+      this.getVideosList();
     }
   },
 

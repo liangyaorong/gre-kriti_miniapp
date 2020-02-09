@@ -16,17 +16,17 @@ Page({
 
   goLogin: function() {
     wx.navigateTo({
-      url: '/pages/login/login',
+      url: '/pages/login/login?tohome=true',
     });
-    console.log("openId", app.globalData.openId)
   },
 
   enter: function () {
-    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
-      this.goLogin();
-    } else {
-      this.goHome();
-    }
+    // if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
+    //   this.goLogin();
+    // } else {
+    //   this.goHome();
+    // }
+    this.goLogin()
   },
 
   getOpenId: function() {

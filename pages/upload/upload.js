@@ -19,7 +19,7 @@ Page({
     //被点击的首页导航的菜单索引
     currentIndexNav: '0',
     //首页导航数据
-    navList: ['默认', '现场', '花絮', '幕后', '精彩', '模特'],
+    navList: ['全部', '现场', '花絮', '幕后', '精彩', '模特'],
 
     //上传视频模块
     upVideoArr: [], //存视频
@@ -235,6 +235,16 @@ Page({
      * 生命周期函数--监听页面显示
      */
   onShow: function () {
+    // 没登陆的，先转跳登陆页面
+    if (app.globalData.openId == '') {
+      this.getOpenId()
+    }
+    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
+      wx.navigateTo({
+        url: '/pages/login/login?id=0',
+      });
+    }
+
     var that = this
     that.setData({
       nickName: app.globalData.nickName,
@@ -242,22 +252,6 @@ Page({
       isAdmin: app.globalData.isAdmin,
       phone: app.globalData.phoneNumber
     })
-
-    // 没登陆的，先转跳登陆页面
-    if (app.globalData.openId == '') {
-      this.getOpenId()
-    }
-    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
-      this.goLogin();
-    }
-  },
-
-
-  goLogin: function () {
-    wx.navigateTo({
-      url: '/pages/login/login',
-    });
-    console.log("openId", app.globalData.openId)
   },
 
   getOpenId: function () {
