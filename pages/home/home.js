@@ -75,7 +75,7 @@ Page({
         that.data.likeReverse,
         that.data.timeReverse,
         false,
-        'all'
+        'passed'
       )
     } else {
       query.queryVideo(
@@ -86,7 +86,7 @@ Page({
         that.data.likeReverse,
         that.data.timeReverse,
         false,
-        'all'
+        'passed'
       )
     }
     wx.hideLoading();
@@ -108,7 +108,7 @@ Page({
       that.data.likeReverse,
       that.data.timeReverse,
       false,
-      'all'
+      'passed'
     )
   },
 
@@ -127,7 +127,7 @@ Page({
       that.data.likeReverse,
       that.data.timeReverse,
       false,
-      'all'
+      'passed'
     )
   },
 
@@ -179,7 +179,9 @@ Page({
   },
 
   // 图片预览
-  previewImg: function(e) {
+  previewImg(e) {
+    this.watch(e);
+
     var scr = e.currentTarget.dataset.scr;
     var scrlist = e.currentTarget.dataset.scrlist;
     wx.previewImage({
@@ -233,16 +235,56 @@ Page({
 
 
   watch: function(e) {
+    var that = this
+
     console.log('浏览+1', e.currentTarget.dataset.collectionid)
+    wx.request({
+      url: 'https://videos.taouu.cn/collection/addplay',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        wx_open_id: app.globalData.openId,
+        id: e.currentTarget.dataset.collectionid,
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log("播放成功", res)
+      }
+    })
+
+    var itemList = []
+    if (e.currentTarget.dataset.type == "image") {
+      itemList = that.data.imagesList
+    } else if (e.currentTarget.dataset.type == "video") {
+      itemList = that.data.videosList
+    }
+    for (var i = 0; i < itemList.length; i++) {
+      if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+        itemList[i].playCount += 1
+        if (e.currentTarget.dataset.type == "image") {
+          console.log("item", itemList)
+          that.setData({
+            imagesList: itemList
+          })
+        } else if (e.currentTarget.dataset.type == "video") {
+          that.setData({
+            videosList: itemList
+          })
+        }
+        break
+      }
+    }
   },
 
 
 
   like: function (e) {
-
+    var that = this
 
     console.log("点赞openid", app.globalData.openId)
     console.log("点赞id", e.currentTarget.dataset.collectionid)
+    console.log('类型', e.currentTarget.dataset.type)
 
     wx.request({  
       url: 'https://videos.taouu.cn/collection/addlike',
@@ -258,6 +300,31 @@ Page({
         console.log("点赞成功", res)
       }
     })
+
+    var itemList = []
+    if (e.currentTarget.dataset.type == "image") {
+      itemList = that.data.imagesList
+    } else if (e.currentTarget.dataset.type == "video") {
+      itemList = that.data.videosList
+    }
+    for (var i = 0; i < itemList.length; i++) {
+      if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+        itemList[i].isCurrentUserLiked = true
+        itemList[i].likeCount += 1
+        if (e.currentTarget.dataset.type == "image") {
+          console.log("item", itemList)
+          that.setData({
+            imagesList: itemList
+          })
+        } else if (e.currentTarget.dataset.type == "video") {
+          that.setData({
+            videosList: itemList
+          })
+        }
+        break
+      }
+    }
+
   },
 
   sortByTime: function(e) {
@@ -322,8 +389,8 @@ Page({
     if (app.globalData.openId == '') {
       this.getOpenId()
     }
+    // this.reflash();
 
-    this.reflash();
   },
 
   /**

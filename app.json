@@ -27,9 +27,9 @@
       },
       {
         "pagePath": "pages/upload/upload",
-        "iconPath": "images/加3.png",
-        "selectedIconPath": "images/加3.png",
-        "text": "上传"
+        "iconPath": "images/发布2.png",
+        "selectedIconPath": "images/发布.png",
+        "text": "发表"
       },
       {
         "pagePath": "pages/my/my",

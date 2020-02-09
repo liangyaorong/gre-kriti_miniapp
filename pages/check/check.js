@@ -84,7 +84,7 @@ Page({
         false,
         true,
         false,
-        'all'
+        'checking'
       )
     } else {
 
@@ -97,7 +97,7 @@ Page({
         false,
         true,
         false,
-        'all'
+        'checking'
       )
     }
     wx.hideLoading();
@@ -106,13 +106,13 @@ Page({
   // 获取视频列表数据
   getImagesList() {
     let that = this;
-    query.queryImage(that, "all", 0, "all", false, true, false, 'all')
+    query.queryImage(that, "all", 0, "all", false, true, false, 'checking')
   },
 
   // 获取视频列表数据
   getVideosList() {
     let that = this;
-    query.queryVideo(that, "all", 0, "all", false, true, false, 'all')
+    query.queryVideo(that, "all", 0, "all", false, true, false, 'checking')
   },
 
 

@@ -21,12 +21,11 @@ Page({
   },
 
   enter: function () {
-    // if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
-    //   this.goLogin();
-    // } else {
-    //   this.goHome();
-    // }
-    this.goLogin()
+    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
+      this.goLogin();
+    } else {
+      this.goHome();
+    }
   },
 
   getOpenId: function() {
