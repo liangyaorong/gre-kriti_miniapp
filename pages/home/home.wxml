@@ -111,7 +111,7 @@
         </view>
 
         <view class='video_img'>
-          <video objectFit='cover' bindplay='watch' data-collectionid="{{item.collectionId}}" data-type='video' src='{{item.itemUrls[0]}}'></video>
+          <video objectFit='cover' bindplay='watch' data-collectionid="{{item.collectionId}}" data-type='video' poster='http://n.sinaimg.cn/translate/w731h1024/20171130/Meqv-fypikws9430343.jpg' control='true' src='{{item.itemUrls[0]}}'></video>
         </view>
 
         <view class='other'>

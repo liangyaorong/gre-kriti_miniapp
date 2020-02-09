@@ -4,18 +4,14 @@
     <image class="remind-img" src="/images/more/loading.gif"></image>
   </view>
   <block wx:else>
-    <!-- <image class="title" src="/images/more/title8.png"></image> -->
+
     <view class="content">
-      <!-- <view class="hd" style="transform:rotateZ({{angle}}deg);">
-        <open-data class='logo' type="userAvatarUrl"></open-data>
-        <image class="wave" src="/images/more/wave.png" mode="aspectFill"></image>
-        <image class="wave wave-bg" src="/images/more/wave.png" mode="aspectFill"></image>
-      </view> -->
+
       <view class="bd">
-        <!-- <image class="smalltitle" src="/images/more/confirm-word1.png"></image> -->
+
         <wxc-button class="confirm-btn" size='large' bindclick='enter'>
           打开精彩 
-          <!-- <wxc-icon style='margin-left:20rpx;' color="#fff" type="arrow-right"></wxc-icon> -->
+
         </wxc-button>
       </view>
     </view>

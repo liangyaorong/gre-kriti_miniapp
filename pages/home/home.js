@@ -51,6 +51,9 @@ Page({
 
   reflash() {
     var that = this
+    that.setData({
+      searchMode: false
+    })
     if (that.data.currentTab == '0') {
       this.getImagesList();
     } else {
@@ -203,10 +206,10 @@ Page({
 
 
 
-  getOpenId: function () {
+  getOpenId: function() {
     var that = this;
     wx.login({
-      success: function (res) {
+      success: function(res) {
         console.log("code", res.code)
         wx.request({
           //获取openid接口  
@@ -215,7 +218,7 @@ Page({
             js_code: res.code,
           },
           method: 'GET',
-          success: function (res) {
+          success: function(res) {
             console.log(res)
             app.globalData.openId = res.data.openid
             app.globalData.sessionKey = res.data.session_key
@@ -252,7 +255,7 @@ Page({
         id: e.currentTarget.dataset.collectionid,
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         console.log("播放成功", res)
 
         var itemList = []
@@ -280,14 +283,14 @@ Page({
       }
     })
 
-    
+
   },
 
 
 
-  like: function (e) {
+  like: function(e) {
     var that = this
-    wx.request({  
+    wx.request({
       url: 'https://videos.taouu.cn/collection/addlike',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -297,7 +300,7 @@ Page({
         id: e.currentTarget.dataset.collectionid,
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         console.log("点赞成功", res)
         var itemList = []
         if (e.currentTarget.dataset.type == "image") {
@@ -325,14 +328,14 @@ Page({
       }
     })
 
-    
+
 
   },
 
   sortByTime: function(e) {
     console.log('按时间排序')
     var that = this
-    that.setData ({
+    that.setData({
       timeReverse: true,
       likeReverse: false
     })
@@ -373,18 +376,20 @@ Page({
       url: 'https://videos.taouu.cn/collection/get',
       data: {
         collection_id: that.data.searchstr,
-        wx_open_id:app.globalData.openId
+        wx_open_id: app.globalData.openId
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         console.log(res.data.type)
         if (res.data.type == "picture") {
           that.setData({
-            imagesList: [res.data]
+            imagesList: [res.data],
+            currentTab: 0
           })
-        } else if (res.data.type == "video"){
+        } else if (res.data.type == "video") {
           that.setData({
-            videosList: [res.data]
+            videosList: [res.data],
+            currentTab: 1
           })
         }
       }
