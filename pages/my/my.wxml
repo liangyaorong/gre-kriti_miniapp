@@ -14,7 +14,7 @@
     </view>
   </view>
 
-  <view class="navbar">
+  <view class="navbar" hidden="{{showVideoOnly}}">
     <lable wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="" bindtap="navbarTap">
       <text>{{item}}</text>
     </lable>

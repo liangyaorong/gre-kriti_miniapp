@@ -10,8 +10,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showVideoOnly: app.globalData.showVideoOnly,
+
+
     // 默认选中菜单
-    currentTab: "0",
+    currentTab: "1",
     // 顶部菜单切换
     navbar: ['图片', '视频'],
 
@@ -100,7 +103,8 @@ Page({
     that.setData({
       upVideoArr: [], //存视频
       upVideoPathLen: 0,
-      currentIndexNav: 0
+      currentIndexNav: 0,
+      upVideoFilesBtn: true
     })
   },
 

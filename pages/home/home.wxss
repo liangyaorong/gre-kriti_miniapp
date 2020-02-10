@@ -21,6 +21,7 @@
   margin: 0 35rpx 0 35rpx;
   font-size: 27rpx;
   text-align: center;
+  /* display: flex; */
   display: inline-block;
 }
 

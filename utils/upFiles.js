@@ -139,7 +139,8 @@ var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
         that.setData({
           upImgArr: [],
           upImagePathLen: 0,
-          currentIndexNav: 0
+          currentIndexNav: 0,
+          upVideoFilesBtn: true
         })
         wx.switchTab({
           url: '../../pages/my/my'

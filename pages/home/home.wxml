@@ -14,7 +14,7 @@
   </view> -->
 
 <view class='nav_area'>
-  <view class="navbar">
+  <view class="navbar" hidden="{{showVideoOnly}}">
     <lable wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="" bindtap="navbarTap">
       <text>{{item}}</text>
     </lable>
@@ -22,7 +22,7 @@
 
   <view class='nav_wrap'>
     <scroll-view class='nav' scroll-x>
-      <view bindtap='activeNav' data-index="{{index}}" class='nav_item {{index===currentIndexNav?"active":""}}' wx:for="{{navList}}" wx:key="{{index}}">
+      <view  bindtap='activeNav' data-index="{{index}}" class='nav_item {{index===currentIndexNav?"active":""}}' wx:for="{{navList}}" wx:key="{{index}}">
         {{item}}
       </view>
     </scroll-view>
@@ -64,7 +64,7 @@
           <swiper indicator-dots="Boolean">
             <block wx:for="{{item.itemUrls}}" wx:for-item="url" wx:key="">
               <swiper-item>
-                <image class='swiper_image' bindtap='previewImg' data-collectionid="{{item.collectionId}}" data-type='image' data-scr="{{url}}" data-scrlist="{{item.itemUrls}}" mode="aspectFill" src='{{url}}'></image>
+                <image class='swiper_image' bindtap='previewImg' data-collectionid="{{item.collectionId}}" data-type='image'  data-watched='{{item.isCurrentUserPlayed}}' data-scr="{{url}}" data-scrlist="{{item.itemUrls}}" mode="aspectFill" src='{{url}}'></image>
               </swiper-item>
             </block>
           </swiper>
@@ -111,7 +111,7 @@
         </view>
 
         <view class='video_img'>
-          <video objectFit='cover' bindplay='watch' data-collectionid="{{item.collectionId}}" data-type='video' src='{{item.itemUrls[0]}}'></video>
+          <video objectFit='cover' bindplay='watch' data-collectionid="{{item.collectionId}}" data-type='video' data-watched='{{item.isCurrentUserPlayed}}' src='{{item.itemUrls[0]}}'></video>
         </view>
 
         <view class='other'>

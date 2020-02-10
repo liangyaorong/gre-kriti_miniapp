@@ -10,6 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showVideoOnly: app.globalData.showVideoOnly,
+
+
     inputShowed: false,  //初始文本框不显示内容
 
     imagePage: 0,
@@ -19,7 +22,7 @@ Page({
     navbar: ['图片', '视频'],
 
     // 默认选中菜单
-    currentTab: "0",
+    currentTab: "1",
 
     //被点击的首页导航的菜单索引
     currentIndexNav: '0',
@@ -43,13 +46,21 @@ Page({
     });
   },
 
+  reflash() {
+    var that = this
+    if (that.data.currentTab == '0') {
+      this.getImagesList();
+    } else {
+      this.getVideosList();
+    }
+  },
 
   /**
      * 生命周期函数--监听页面加载
      */
   onLoad: function (options) {
     console.log("我的页面data", this.data)
-    this.getImagesList();
+    this.reflash();
   },
 
 

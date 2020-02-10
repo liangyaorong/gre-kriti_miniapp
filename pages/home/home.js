@@ -13,6 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showVideoOnly: app.globalData.showVideoOnly,
 
     addflag: true, //判断是否显示搜索框右侧部分
     addimg: '../../images/add.png',
@@ -24,7 +25,7 @@ Page({
     videoPage: 0,
 
     // 顶部菜单切换
-    currentTab: "0",
+    currentTab: "1",
     navbar: ['图片', '视频'],
 
     //分类导航
@@ -144,7 +145,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getImagesList();
+    this.reflash();
   },
 
   // 下拉刷新
@@ -243,45 +244,48 @@ Page({
 
   watch: function(e) {
     var that = this
+    if (e.currentTarget.dataset.watched == false) {
+      console.log('浏览+1')
+      wx.request({
+        url: 'https://videos.taouu.cn/collection/addplay',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          wx_open_id: app.globalData.openId,
+          id: e.currentTarget.dataset.collectionid,
+        },
+        method: 'POST',
+        success: function(res) {
+          console.log("播放成功", res)
 
-    console.log('浏览+1', e.currentTarget.dataset.collectionid)
-    wx.request({
-      url: 'https://videos.taouu.cn/collection/addplay',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        wx_open_id: app.globalData.openId,
-        id: e.currentTarget.dataset.collectionid,
-      },
-      method: 'POST',
-      success: function(res) {
-        console.log("播放成功", res)
-
-        var itemList = []
-        if (e.currentTarget.dataset.type == "image") {
-          itemList = that.data.imagesList
-        } else if (e.currentTarget.dataset.type == "video") {
-          itemList = that.data.videosList
-        }
-        for (var i = 0; i < itemList.length; i++) {
-          if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
-            itemList[i].playCount += 1
-            if (e.currentTarget.dataset.type == "image") {
-              console.log("item", itemList)
-              that.setData({
-                imagesList: itemList
-              })
-            } else if (e.currentTarget.dataset.type == "video") {
-              that.setData({
-                videosList: itemList
-              })
+          var itemList = []
+          if (e.currentTarget.dataset.type == "image") {
+            itemList = that.data.imagesList
+          } else if (e.currentTarget.dataset.type == "video") {
+            itemList = that.data.videosList
+          }
+          for (var i = 0; i < itemList.length; i++) {
+            if (itemList[i].collectionId == e.currentTarget.dataset.collectionid && itemList[i].isCurrentUserPlayed == false) {
+              itemList[i].playCount += 1
+              itemList[i].isCurrentUserPlayed = true
+              if (e.currentTarget.dataset.type == "image") {
+                console.log("item", itemList)
+                that.setData({
+                  imagesList: itemList
+                })
+              } else if (e.currentTarget.dataset.type == "video") {
+                that.setData({
+                  videosList: itemList
+                })
+              }
+              break
             }
-            break
           }
         }
-      }
-    })
+      })
+    }
+
 
 
   },
