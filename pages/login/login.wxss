@@ -69,7 +69,9 @@
 
 .icontext {
   font-size: 23rpx;
-  display: block;
+  padding-left: 10rpx;
+  font-weight: bold;
+  line-height: 30rpx;
 }
 
 .contact-btn {
@@ -85,7 +87,7 @@ button {
 }
 
 .header {
-  margin: 90rpx 0 90rpx 50rpx;
+  margin: 50rpx 0 10rpx 50rpx;
   text-align: center;
   width: 650rpx;
   height: 300rpx;
@@ -99,13 +101,13 @@ button {
 
 .content {
   margin-left: 50rpx;
-  margin-bottom: 90rpx;
+  margin-bottom: 10rpx;
 }
 
 .content text {
   display: block;
   color: #9d9d9d;
-  margin-top: 40rpx;
+  margin-bottom: 10rpx;
 }
 
 .nav_area {
@@ -171,13 +173,7 @@ button {
   margin-left: 10rpx;
 }
 
-.nav {
-  white-space: nowrap;
-  padding: 5rpx 0;
-  width: 70%;
-  /* border: 2rpx solid rgb(0, 0, 0); */
-  display: flex;
-}
+
 
 .nav_item {
   padding-left: 35rpx;
@@ -294,17 +290,12 @@ swiper {
   justify-content: space-around;
 }
 
-.icontext {
-  font-size: 23rpx;
-  padding-left: 10rpx;
-  /* font-weight: bold; */
-  float: right;
-  line-height: 50rpx;
-}
-
-.head-title {
-  margin: 20rpx 30rpx 50rpx 50rpx;
-  color: grey;
+.icon {
+    /* float: left; */
+     margin: 15rpx 30rpx;
+  display: flex;
+  text-align: center;
+  align-items: center;
 }
 
 .artist {
@@ -347,4 +338,25 @@ swiper {
 .time {
   font-size: 25rpx;
   color: #999;
+}
+
+.nav {
+  white-space: nowrap;
+  width: 90%;
+  height: 500rpx;
+  margin: 0 5% 0 5%;
+  /* border: 2rpx solid rgb(0, 0, 0); */
+  display: flex;
+}
+
+.longtext {
+    margin: 20rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  /* -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; */
+  font-size: 24rpx;
 }

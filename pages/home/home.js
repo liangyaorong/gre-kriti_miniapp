@@ -13,6 +13,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    currentPlayVideoIndex: 0,
+    isActive: true,
+
+
     showVideoOnly: app.globalData.showVideoOnly,
 
     addflag: true, //判断是否显示搜索框右侧部分
@@ -30,7 +34,7 @@ Page({
 
     //分类导航
     currentIndexNav: '0',
-    navList: ['全部', '现场', '花絮', '幕后', '精彩', '模特'],
+    navList: ['全部', '护肤美妆', '学习工作', '生活趣味', '防疫妙招'],
 
     //视频列表数据
     videosList: [],
@@ -46,7 +50,7 @@ Page({
     searchMode: false,
 
     //头图数据
-    headerImageUrl: 'https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=109e35ebacec08fa320d1bf538875608/95eef01f3a292df507633d41b0315c6035a873c6.jpg',
+    headerImageUrl:'https://wx3.sinaimg.cn/mw690/61b698d6gy1gbspo3xexdj21hc0u0b2g.jpg',
   },
 
 
@@ -77,7 +81,8 @@ Page({
       })
 
       if (that.data.currentTab == 0) {
-        query.queryImage(that,
+        query.queryImage(
+          that,
           app.globalData.openId,
           that.data.imagePage + 1,
           label,
@@ -88,7 +93,7 @@ Page({
         )
       } else {
         query.queryVideo(
-          app.globalData.openId,
+          that,
           app.globalData.openId,
           that.data.videoPage + 1,
           label,
@@ -205,6 +210,22 @@ Page({
     })
   },
 
+  // 图片预览
+  previewOneImg(e) {
+
+    var scr = e.currentTarget.dataset.scr;
+    var scrlist = [scr]
+    wx.previewImage({
+      current: scr,
+      //当前图片地址
+      urls: scrlist,
+      //所有要预览的图片的地址集合 数组形式
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+
 
 
   getOpenId: function() {
@@ -244,6 +265,17 @@ Page({
 
   watch: function(e) {
     var that = this
+
+    // 暂停其他视频
+    if (e.currentTarget.dataset.type == "video") {
+      for (var i = 0; i < that.data.videosList.length; i++) {
+        if (that.data.videosList[i].collectionId != e.currentTarget.dataset.collectionid) {
+          wx.createVideoContext(that.data.videosList[i].collectionId.toString()).pause();
+        }
+      }
+    }
+
+
     if (e.currentTarget.dataset.watched == false) {
       console.log('浏览+1')
       wx.request({
@@ -265,29 +297,25 @@ Page({
           } else if (e.currentTarget.dataset.type == "video") {
             itemList = that.data.videosList
           }
-          for (var i = 0; i < itemList.length; i++) {
-            if (itemList[i].collectionId == e.currentTarget.dataset.collectionid && itemList[i].isCurrentUserPlayed == false) {
-              itemList[i].playCount += 1
-              itemList[i].isCurrentUserPlayed = true
-              if (e.currentTarget.dataset.type == "image") {
-                console.log("item", itemList)
-                that.setData({
-                  imagesList: itemList
-                })
-              } else if (e.currentTarget.dataset.type == "video") {
-                that.setData({
-                  videosList: itemList
-                })
-              }
-              break
+
+          var i = e.currentTarget.dataset.idx
+          if (itemList[i].isCurrentUserPlayed == false) {
+            itemList[i].playCount += 1
+            itemList[i].isCurrentUserPlayed = true
+            if (e.currentTarget.dataset.type == "image") {
+              console.log("item", itemList)
+              that.setData({
+                imagesList: itemList
+              })
+            } else if (e.currentTarget.dataset.type == "video") {
+              that.setData({
+                videosList: itemList
+              })
             }
           }
         }
       })
     }
-
-
-
   },
 
 
@@ -312,21 +340,20 @@ Page({
         } else if (e.currentTarget.dataset.type == "video") {
           itemList = that.data.videosList
         }
-        for (var i = 0; i < itemList.length; i++) {
-          if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
-            itemList[i].isCurrentUserLiked = true
-            itemList[i].likeCount += 1
-            if (e.currentTarget.dataset.type == "image") {
-              console.log("item", itemList)
-              that.setData({
-                imagesList: itemList
-              })
-            } else if (e.currentTarget.dataset.type == "video") {
-              that.setData({
-                videosList: itemList
-              })
-            }
-            break
+
+        var i = e.currentTarget.dataset.idx
+        if (itemList[i].isCurrentUserLiked == false) {
+          itemList[i].isCurrentUserLiked = true
+          itemList[i].likeCount += 1
+          if (e.currentTarget.dataset.type == "image") {
+            console.log("item", itemList)
+            that.setData({
+              imagesList: itemList
+            })
+          } else if (e.currentTarget.dataset.type == "video") {
+            that.setData({
+              videosList: itemList
+            })
           }
         }
       }
@@ -422,6 +449,7 @@ Page({
     })
   },
 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -438,7 +466,7 @@ Page({
     if (app.globalData.openId == '') {
       this.getOpenId()
     }
-    // this.reflash();
+
 
   },
 
@@ -446,14 +474,12 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
   },
   /**
    * 用户点击右上角分享

@@ -5,7 +5,7 @@
 /* 顶部菜单切换 */
 
 .nav_area {
-  padding-top: 10rpx;
+  /* padding-top: 10rpx; */
   color: grey;
   background-color: white;
 }
@@ -49,12 +49,16 @@
 .nav_wrap {
   display: flex;
   height: 60rpx;
+  /* padding: 10rpx; */
+  border: 5rpx solid black;
+  border-radius: 5rpx;
   padding: 10rpx;
+
 }
 
 .nav_wrap_text {
   width: 27%;
-  border-left: 2rpx solid #ddd;
+  border-left: 5rpx solid black;
 }
 
 .nav_wrap_text text {
@@ -77,7 +81,7 @@
 }
 
 .nav_item {
-  padding-left: 35rpx;
+  padding-left: 25rpx;
   font-size: 25rpx;
   text-align: center;
   display: inline-block;

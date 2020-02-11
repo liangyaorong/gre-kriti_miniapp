@@ -189,21 +189,33 @@ Page({
         } else if (e.currentTarget.dataset.type == "video") {
           itemList = that.data.videosList
         }
-        for (var i = 0; i < itemList.length; i++) {
-          if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
-            itemList.splice(i, 1)
-            if (e.currentTarget.dataset.type == "image") {
-              that.setData({
-                imagesList: itemList
-              })
-            } else if (e.currentTarget.dataset.type == "video") {
-              that.setData({
-                videosList: itemList
-              })
-            }
-            break
-          }
+
+        var i = e.currentTarget.dataset.idx
+        itemList.splice(i, 1)
+        if (e.currentTarget.dataset.type == "image") {
+          that.setData({
+            imagesList: itemList
+          })
+        } else if (e.currentTarget.dataset.type == "video") {
+          that.setData({
+            videosList: itemList
+          })
         }
+        // for (var i = 0; i < itemList.length; i++) {
+        //   if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+        //     itemList.splice(i, 1)
+        //     if (e.currentTarget.dataset.type == "image") {
+        //       that.setData({
+        //         imagesList: itemList
+        //       })
+        //     } else if (e.currentTarget.dataset.type == "video") {
+        //       that.setData({
+        //         videosList: itemList
+        //       })
+        //     }
+        //     break
+        //   }
+        // }
       }
     })
   },
@@ -231,22 +243,34 @@ Page({
         } else if (e.currentTarget.dataset.type == "video") {
           itemList = that.data.videosList
         }
-        for (var i = 0; i < itemList.length; i++) {
-          if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
-            itemList.splice(i, 1)
-            if (e.currentTarget.dataset.type == "image") {
-              console.log("item", itemList)
-              that.setData({
-                imagesList: itemList
-              })
-            } else if (e.currentTarget.dataset.type == "video") {
-              that.setData({
-                videosList: itemList
-              })
-            }
-            break
-          }
+
+        var i = e.currentTarget.dataset.idx
+        itemList.splice(i, 1)
+        if (e.currentTarget.dataset.type == "image") {
+          that.setData({
+            imagesList: itemList
+          })
+        } else if (e.currentTarget.dataset.type == "video") {
+          that.setData({
+            videosList: itemList
+          })
         }
+        // for (var i = 0; i < itemList.length; i++) {
+        //   if (itemList[i].collectionId == e.currentTarget.dataset.collectionid) {
+        //     itemList.splice(i, 1)
+        //     if (e.currentTarget.dataset.type == "image") {
+        //       console.log("item", itemList)
+        //       that.setData({
+        //         imagesList: itemList
+        //       })
+        //     } else if (e.currentTarget.dataset.type == "video") {
+        //       that.setData({
+        //         videosList: itemList
+        //       })
+        //     }
+        //     break
+        //   }
+        // }
       }
     })
   },

@@ -38,7 +38,7 @@
         </view>
       </scroll-view>
     </view>
-    <button form-type="submit" type='primary'> 发表 </button>
+    <button form-type="submit" class='submit'> 发表 </button>
   </form>
 
 
@@ -75,7 +75,7 @@
         </view>
       </scroll-view>
     </view>
-    <button form-type="submit" type='primary'> 发表 </button>
+    <button form-type="submit" class='submit'> 发表 </button>
   </form>
 
 </view>

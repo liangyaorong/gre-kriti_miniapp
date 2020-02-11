@@ -27,7 +27,7 @@ Page({
     //被点击的首页导航的菜单索引
     currentIndexNav: '0',
     //首页导航数据
-    navList: ['全部', '现场', '花絮', '幕后', '精彩', '模特'],
+    navList: ['全部', '护肤美妆', '学习工作', '生活趣味', '防疫妙招'],
 
     //视频列表数据
     videosList: [],
@@ -207,7 +207,17 @@ Page({
   },
 
   watch: function (e) {
-    console.log('浏览+1')
+    var that = this
+
+    // 暂停其他视频
+    if (e.currentTarget.dataset.type == "video") {
+      for (var i = 0; i < that.data.videosList.length; i++) {
+        if (that.data.videosList[i].collectionId != e.currentTarget.dataset.collectionid) {
+          wx.createVideoContext(that.data.videosList[i].collectionId.toString()).pause();
+          console.log("停了", that.data.videosList[i].collectionId.toString())
+        }
+      }
+    }
   },
 
   // 使文本框进入可编辑状态
@@ -272,6 +282,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    this.setData({
+      videosList:[]
+    })
 
   },
 

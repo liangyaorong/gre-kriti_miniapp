@@ -8,11 +8,10 @@
     <view class="content">
 
       <view class="bd">
-
-        <wxc-button class="confirm-btn" size='large' bindclick='enter'>
-          打开精彩 
-
-        </wxc-button>
+      
+        <button class="confirm-btn" bindtap='enter'>
+   
+        </button>
       </view>
     </view>
   </block>
