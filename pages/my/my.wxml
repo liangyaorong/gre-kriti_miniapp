@@ -93,8 +93,10 @@
             </view>
           </view>
           <view class="text-box2">
-              <view class="notPass" hidden="{{item.pass=='passed'}}">审核未通过</view>
-              <view class="pass" hidden="{{item.pass!='passed'}}">审核通过</view>
+              <view class="notPass" hidden="{{item.pass=='passed'||item.pass=='checking'}}">审核未通过</view>
+              <view class="pass" hidden="{{item.pass=='nopassed'||item.pass=='checking'}}">审核通过</view>
+              <view class="pass" hidden="{{item.pass=='passed'||item.pass=='nopassed'}}">审核中</view>
+
           </view>
         </view>
 
