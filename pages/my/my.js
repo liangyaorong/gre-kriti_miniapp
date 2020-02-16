@@ -88,7 +88,8 @@ Page({
             } else {
               app.globalData.nickName = res.data.user.wxName
               app.globalData.avatarUrl = res.data.user.wxHeadUrl
-              app.globalData.phoneNumber = res.data.user.phone
+              // app.globalData.phoneNumber = res.data.user.phone
+              app.globalData.phoneNumber = ""
               app.globalData.isAdmin = res.data.user.isAdmin
             }
           }
@@ -234,11 +235,7 @@ Page({
   },
 
   getPhoneNumber(e) {
-    console.log(e.detail)
-    console.log(app.globalData.openId)
-    console.log(app.globalData.sessionKey)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
+    var that = this
 
     wx.request({
       //获取openid接口  
@@ -254,8 +251,12 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        console.log(res.data)
         console.log("设置成功",res)
-        
+        app.globalData.phoneNumber = "1234"
+        that.setData({
+          phone: "1234"
+        })
       }
     })
   },

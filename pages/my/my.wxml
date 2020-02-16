@@ -20,11 +20,6 @@
     </view>
   </view>
 
-
-
-
-
-
   <!--图片-->
   <view hidden="{{currentTab!='0'}}">
     <!-- 图片列表 -->
@@ -93,10 +88,12 @@
             <view class="arow01">
               <view class="artist-name">ID: {{item.collectionId}}</view>
             </view>
+
             <view class="arow">
               <view class="time">{{item.createTime}}</view>
             </view>
           </view>
+
           <view class="text-box2">
               <view class="notPass" hidden="{{item.pass=='passed'||item.pass=='checking'}}">审核未通过</view>
               <view class="pass" hidden="{{item.pass=='nopassed'||item.pass=='checking'}}">审核通过</view>

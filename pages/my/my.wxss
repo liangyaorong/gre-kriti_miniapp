@@ -323,14 +323,16 @@ swiper {
 }
 
 .text-box {
-  width: 40%;
+  width: 60%;
   float: left;
   padding-left: 25rpx;
+  /* border: 5rpx solid black; */
 }
 
-.textbox2 {
-  width: 50%;
-  float: right;
+.text-box2 {
+  /* width: 30%; */
+  float: left;
+  /* border: 10rpx solid black; */
 }
 
 .arow01 {
@@ -344,7 +346,7 @@ swiper {
 }
 
 .artist-name {
-  width: 360rpx;
+  width: 400rpx;
   font-size: 30rpx;
   font-weight: 700;
   height: 15rpx;
@@ -352,7 +354,7 @@ swiper {
 }
 
 .notPass {
-  width: 360rpx;
+  /* width: 600rpx; */
   font-size: 30rpx;
   font-weight: 700;
   height: 15rpx;
@@ -360,7 +362,7 @@ swiper {
 }
 
 .pass {
-  width: 360rpx;
+  /* width: 360rpx; */
   font-size: 30rpx;
   font-weight: 700;
   height: 15rpx;
@@ -369,7 +371,7 @@ swiper {
 }
 
 .checking {
-  width: 360rpx;
+  /* width: 360rpx; */
   font-size: 30rpx;
   font-weight: 700;
   height: 15rpx;
