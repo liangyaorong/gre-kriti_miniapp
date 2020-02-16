@@ -113,7 +113,7 @@ var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
     })
   }
   const uploadTask = wx.uploadFile({
-    url: 'https://videos.taouu.cn/collection/add',
+    url: 'https://shipin.gre-kriti.com/collection/add',
     filePath: that.data.upImgArr[uploadIndex].path,
     name: 'file',
     formData: {

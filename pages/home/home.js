@@ -13,6 +13,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+
+
     currentPlayVideoIndex: 0,
     isActive: true,
 
@@ -50,7 +52,8 @@ Page({
     searchMode: false,
 
     //头图数据
-    headerImageUrl:'https://wx3.sinaimg.cn/mw690/61b698d6gy1gbspo3xexdj21hc0u0b2g.jpg',
+    headerImageUrl: "",
+
   },
 
 
@@ -150,6 +153,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.getStartPic()
     this.reflash();
   },
 
@@ -235,7 +239,7 @@ Page({
         console.log("code", res.code)
         wx.request({
           //获取openid接口  
-          url: 'https://videos.taouu.cn/login/regist',
+          url: 'https://shipin.gre-kriti.com/login/regist',
           data: {
             js_code: res.code,
           },
@@ -279,7 +283,7 @@ Page({
     if (e.currentTarget.dataset.watched == false) {
       console.log('浏览+1')
       wx.request({
-        url: 'https://videos.taouu.cn/collection/addplay',
+        url: 'https://shipin.gre-kriti.com/collection/addplay',
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
@@ -323,7 +327,7 @@ Page({
   like: function(e) {
     var that = this
     wx.request({
-      url: 'https://videos.taouu.cn/collection/addlike',
+      url: 'https://shipin.gre-kriti.com/collection/addlike',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
@@ -404,7 +408,7 @@ Page({
 
     wx.request({
       //获取openid接口  
-      url: 'https://videos.taouu.cn/collection/get',
+      url: 'https://shipin.gre-kriti.com/collection/get',
       data: {
         collection_id: that.data.searchstr,
         wx_open_id: app.globalData.openId
@@ -446,6 +450,25 @@ Page({
   activity_clear(e) {
     this.setData({
       searchstr: ''
+    })
+  },
+
+
+  getStartPic() {
+    var that = this
+
+    wx.request({
+      url: 'https://shipin.gre-kriti.com/login/getstartpic',
+      data: {
+        sart_pic: false,
+        head_pic: true
+      },
+      method: 'GET',
+      success: function (res) {
+        that.setData({
+          headerImageUrl: res.data
+        })
+      }
     })
   },
 

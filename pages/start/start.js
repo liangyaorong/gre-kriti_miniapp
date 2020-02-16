@@ -4,7 +4,8 @@ var app = getApp();
 Page({
   data: {
     remind: '加载中',
-    angle: 0
+    angle: 0,
+    background_iamge:""
   },
 
   goHome: function() {
@@ -35,7 +36,7 @@ Page({
         console.log("code", res.code)
         wx.request({
           //获取openid接口  
-          url: 'https://videos.taouu.cn/login/regist',
+          url: 'https://shipin.gre-kriti.com/login/regist',
           data: {
             js_code: res.code,
           },
@@ -63,7 +64,26 @@ Page({
 
 
   onLoad: function() {
+    this.getStartPic()
     this.getOpenId();
+  },
+
+  getStartPic() {
+    var that = this
+
+    wx.request({
+      url: 'https://shipin.gre-kriti.com/login/getstartpic',
+      data: {
+        sart_pic: true,
+        head_pic: false
+      },
+      method: 'GET',
+      success: function (res) {
+        that.setData({
+          background_iamge: res.data
+        })
+      }
+    })
   },
 
 

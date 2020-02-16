@@ -35,7 +35,7 @@ Page({
       console.log("wx_head_url:", e.detail.userInfo.avatarUrl)
       wx.request({
         //获取openid接口  
-        url: 'https://videos.taouu.cn/login/useradd',
+        url: 'https://shipin.gre-kriti.com/login/useradd',
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },

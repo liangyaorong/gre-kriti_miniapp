@@ -170,7 +170,7 @@ Page({
   pass: function (e) {
     var that = this
     wx.request({
-      url: 'https://videos.taouu.cn/check/pass',
+      url: 'https://shipin.gre-kriti.com/check/pass',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
@@ -224,7 +224,7 @@ Page({
     var that = this
     console.log('审核不通过', e.currentTarget.dataset.collectionid)
     wx.request({
-      url: 'https://videos.taouu.cn/check/pass',
+      url: 'https://shipin.gre-kriti.com/check/pass',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },

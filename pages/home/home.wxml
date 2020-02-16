@@ -22,14 +22,14 @@
 
   <view class='nav_wrap'>
     <scroll-view class='nav' scroll-x>
-      <view  bindtap='activeNav' data-index="{{index}}" class='nav_item {{index===currentIndexNav?"active":""}}' wx:for="{{navList}}" wx:key="{{index}}">
+      <view  bindtap='activeNav' data-index="{{index}}" class='nav_item {{index==currentIndexNav?"active":""}}' wx:for="{{navList}}" wx:key="{{index}}">
         {{item}}
       </view>
     </scroll-view>
     <view class='nav_wrap_text' >
-      <text bindtap="sortByTime">时间</text>
+      <text bindtap="sortByTime" class='order_flag {{timeReverse?"active":""}}'>时间</text>
       <image bindtap="sortByTime" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABaCAYAAABOkvOJAAAACXBIWXMAAC4jAAAuIwF4pT92AAADdUlEQVR4nO2d7XHiMBBA33ry/1ICHVw6CNdBOgglUALXQdKBrwNK8HXgdEA6IBVsftjONyB/CK3MvhlNmJCxN3pIixEri6rifEdEroE7YNH+qlLVKvp5Xch3WhkV8PvLU4+quo56bhfyHRGpgNsDT/+JOlJaIdfAA7AHdGatBpaqSmg7cbyyz7H6ti6AykDHxW5BUoDlieNUMYUUInLH4eE5JzapAwihAG5SB3EmsnjRFakDcD5TAGXqIM7Ev9QBhFCo6g54TB1IZF7IJIdcAajqun3vvaJ5CzwnamCjqvvUgYRw1T1Q1S2wTRiLgyd1c7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQYxTQ1GWLSCkiarRVInIRpXfdCNkC9ykDOcEtUInIInEc0cmpCvcXmVRBjSG3KtxF6gBi40ndGLlV4c6+5K6rwv2bOpAAnlT1IXUQsemqcDdtFe4am1W420uQAZ+rcCuaTWichHhSN4YLMYYLMYYLMYYLMYYLMYYLMYYLMUbWQkRkIyK7dhGrFpFV6phC+LAg2MW+fVuAi7nladT9bZsPRSffV5fI28TSfDRV/3DcPXCT5QgRkSWHVzjvRaQ8XzThHNnCHJoFuIcshdC8io9hTsoJGR23uQoJwYyUQBlAvkk9dKEquZQ+MoD/WQpR1ZrwfXiTSekp4wVYZykEQFVXGJYyQMZSVetshYBdKUNlQL455A1rUsbIgBkIATtSxsqAmQiB9FKmkAEzEgLppEwlA2YmBM4vZUoZMEMhcD4pU8uAmQqB+FJiyIAZC4F4UmLJgAu5sWTb0aEFSU8c7+in9ufkMuBChEBvKVPQWwbMfMr6SM/payyDZMAFCYGzSRksA+DjOm9J+tujjm07Am6xGvF/3QM3o9bc2wB/WnTPuaWQMlpGl8/vDHTg1G078psrSWR0QjYGOnDy1qMDxkqZTIaqUrQHnBvPoX84MtGPS+AHWGDgFT1xKwdMFWXPc0w6Mr4m9ZWBTpyq1cD1wPk7VEoUGar6fqXefhtwRd67JWxpRsfgaTjgij7KNPV2/k6I884RKVFlwIVdqYfSJvqvmyk8E1kG+Ag5STuV77TZ8SI6r0i0L02dGv/jAAAAAElFTkSuQmCC"></image>
-      <text bindtap="sortByLike">点赞</text>
+      <text bindtap="sortByLike" class='order_flag {{likeReverse?"active":""}}'>点赞</text>
       <image bindtap="sortByLike" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABaCAYAAABOkvOJAAAACXBIWXMAAC4jAAAuIwF4pT92AAADdUlEQVR4nO2d7XHiMBBA33ry/1ICHVw6CNdBOgglUALXQdKBrwNK8HXgdEA6IBVsftjONyB/CK3MvhlNmJCxN3pIixEri6rifEdEroE7YNH+qlLVKvp5Xch3WhkV8PvLU4+quo56bhfyHRGpgNsDT/+JOlJaIdfAA7AHdGatBpaqSmg7cbyyz7H6ti6AykDHxW5BUoDlieNUMYUUInLH4eE5JzapAwihAG5SB3EmsnjRFakDcD5TAGXqIM7Ev9QBhFCo6g54TB1IZF7IJIdcAajqun3vvaJ5CzwnamCjqvvUgYRw1T1Q1S2wTRiLgyd1c7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQY7gQYxTQ1GWLSCkiarRVInIRpXfdCNkC9ykDOcEtUInIInEc0cmpCvcXmVRBjSG3KtxF6gBi40ndGLlV4c6+5K6rwv2bOpAAnlT1IXUQsemqcDdtFe4am1W420uQAZ+rcCuaTWichHhSN4YLMYYLMYYLMYYLMYYLMYYLMYYLMUbWQkRkIyK7dhGrFpFV6phC+LAg2MW+fVuAi7nladT9bZsPRSffV5fI28TSfDRV/3DcPXCT5QgRkSWHVzjvRaQ8XzThHNnCHJoFuIcshdC8io9hTsoJGR23uQoJwYyUQBlAvkk9dKEquZQ+MoD/WQpR1ZrwfXiTSekp4wVYZykEQFVXGJYyQMZSVetshYBdKUNlQL455A1rUsbIgBkIATtSxsqAmQiB9FKmkAEzEgLppEwlA2YmBM4vZUoZMEMhcD4pU8uAmQqB+FJiyIAZC4F4UmLJgAu5sWTb0aEFSU8c7+in9ufkMuBChEBvKVPQWwbMfMr6SM/payyDZMAFCYGzSRksA+DjOm9J+tujjm07Am6xGvF/3QM3o9bc2wB/WnTPuaWQMlpGl8/vDHTg1G078psrSWR0QjYGOnDy1qMDxkqZTIaqUrQHnBvPoX84MtGPS+AHWGDgFT1xKwdMFWXPc0w6Mr4m9ZWBTpyq1cD1wPk7VEoUGar6fqXefhtwRd67JWxpRsfgaTjgij7KNPV2/k6I884RKVFlwIVdqYfSJvqvmyk8E1kG+Ag5STuV77TZ8SI6r0i0L02dGv/jAAAAAElFTkSuQmCC"></image>
     </view>
 

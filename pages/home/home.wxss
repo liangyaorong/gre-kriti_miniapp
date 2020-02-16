@@ -57,7 +57,7 @@
 }
 
 .nav_wrap_text {
-  width: 27%;
+  width: 30%;
   border-left: 5rpx solid black;
 }
 
@@ -67,6 +67,16 @@
   margin-left: 15rpx;
 }
 
+.order_flag {
+    font-size: 25rpx;
+}
+.order_flag.active{
+  font-size: 28rpx;
+  color: black;
+}
+
+
+
 .nav_wrap_text image {
   width: 20rpx;
   height: 20rpx;
@@ -75,7 +85,7 @@
 
 .nav {
   white-space: nowrap;
-  width: 73%;
+  width: 70%;
   /* border: 2rpx solid rgb(0, 0, 0); */
   display: flex;
 }

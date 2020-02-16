@@ -9,7 +9,7 @@
       <button class='shenhe' bindtap="goCheck">你是管理员，前往审核</button>
     </view>
 
-    <view hidden="{{phone != ''}}">
+    <view hidden="{{phone != '' && phone != null}}">
       <button class='shenhe' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"> 授权手机号,参与活动吧</button>
     </view>
 
@@ -41,7 +41,12 @@
               <view class="time">{{item.createTime}}</view>
             </view>
           </view>
+          <view class="text-box2">
+              <view class="notPass" hidden="{{item.pass=='passed'||item.pass=='checking'}}">审核未通过</view>
+              <view class="pass" hidden="{{item.pass=='nopassed'||item.pass=='checking'}}">审核通过</view>
+              <view class="checking" hidden="{{item.pass=='passed'||item.pass=='nopassed'}}">审核中</view>
 
+          </view>
         </view>
 
         <view class='video_title'>{{item.post}}
@@ -95,7 +100,7 @@
           <view class="text-box2">
               <view class="notPass" hidden="{{item.pass=='passed'||item.pass=='checking'}}">审核未通过</view>
               <view class="pass" hidden="{{item.pass=='nopassed'||item.pass=='checking'}}">审核通过</view>
-              <view class="pass" hidden="{{item.pass=='passed'||item.pass=='nopassed'}}">审核中</view>
+              <view class="checking" hidden="{{item.pass=='passed'||item.pass=='nopassed'}}">审核中</view>
 
           </view>
         </view>

@@ -71,7 +71,7 @@ Page({
         console.log("code", res.code)
         wx.request({
           //获取openid接口  
-          url: 'https://videos.taouu.cn/login/regist',
+          url: 'https://shipin.gre-kriti.com/login/regist',
           data: {
             js_code: res.code,
           },
@@ -234,9 +234,30 @@ Page({
   },
 
   getPhoneNumber(e) {
-    console.log(e.detail.errMsg)
+    console.log(e.detail)
+    console.log(app.globalData.openId)
+    console.log(app.globalData.sessionKey)
     console.log(e.detail.iv)
     console.log(e.detail.encryptedData)
+
+    wx.request({
+      //获取openid接口  
+      url: 'https://shipin.gre-kriti.com/user/setphone',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        wx_open_id: app.globalData.openId,
+        decryptData: e.detail.encryptedData,
+        key: app.globalData.sessionKey,
+        iv: e.detail.iv
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log("设置成功",res)
+        
+      }
+    })
   },
 
 

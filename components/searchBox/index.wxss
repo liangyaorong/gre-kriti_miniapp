@@ -51,7 +51,7 @@
 .activity_add {
   width: 60rpx;
   text-align: right;
-  border-left: 4rpx solid #f2f2f2;
+  /* border-left: 4rpx solid #f2f2f2; */
   margin-left: 20rpx;
 }
 

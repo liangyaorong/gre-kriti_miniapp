@@ -368,6 +368,15 @@ swiper {
 
 }
 
+.checking {
+  width: 360rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  height: 15rpx;
+  color: rgb(126, 83, 3);
+
+}
+
 .time {
   font-size: 25rpx;
   color: #999;

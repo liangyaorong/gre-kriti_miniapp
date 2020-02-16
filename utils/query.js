@@ -14,7 +14,7 @@ var queryImage = (
   console.log("函数内当前页", page)
 
   wx.request({
-    url: 'https://videos.taouu.cn/home/stream',
+    url: 'https://shipin.gre-kriti.com/home/stream',
     data: {
       "wx_open_id": openid,
       'page': page,
@@ -59,7 +59,7 @@ var queryVideo = (
   console.log("函数内当前页", page)
 
   wx.request({
-    url: 'https://videos.taouu.cn/home/stream',
+    url: 'https://shipin.gre-kriti.com/home/stream',
     data: {
       "wx_open_id": openid,
       'page': page,

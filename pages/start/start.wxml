@@ -1,5 +1,5 @@
 <!--start.wxml-->
-<view class="container" >
+<view class="container" style="background-image: url({{background_iamge}});" >
   <view class="remind-box" wx:if="{{remind}}">
     <image class="remind-img" src="/images/more/loading.gif"></image>
   </view>
