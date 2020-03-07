@@ -14,7 +14,7 @@ Page({
    */
   data: {
 
-
+    nav_class:"nav_class_0",
     currentPlayVideoIndex: 0,
     isActive: true,
 
@@ -190,7 +190,8 @@ Page({
   activeNav(e) {
     var that = this
     this.setData({
-      currentIndexNav: e.target.dataset.index
+      currentIndexNav: e.target.dataset.index,
+      nav_class: "nav_class" + e.target.dataset.index
     })
     this.reflash();
 
@@ -337,27 +338,29 @@ Page({
       },
       method: 'POST',
       success: function(res) {
-        console.log("点赞成功", res)
-        var itemList = []
-        if (e.currentTarget.dataset.type == "image") {
-          itemList = that.data.imagesList
-        } else if (e.currentTarget.dataset.type == "video") {
-          itemList = that.data.videosList
-        }
-
-        var i = e.currentTarget.dataset.idx
-        if (itemList[i].isCurrentUserLiked == false) {
-          itemList[i].isCurrentUserLiked = true
-          itemList[i].likeCount += 1
+        console.log("点赞成功", res.statusCode)
+        if (res.statusCode == 200) {
+          var itemList = []
           if (e.currentTarget.dataset.type == "image") {
-            console.log("item", itemList)
-            that.setData({
-              imagesList: itemList
-            })
+            itemList = that.data.imagesList
           } else if (e.currentTarget.dataset.type == "video") {
-            that.setData({
-              videosList: itemList
-            })
+            itemList = that.data.videosList
+          }
+
+          var i = e.currentTarget.dataset.idx
+          if (itemList[i].isCurrentUserLiked == false) {
+            itemList[i].isCurrentUserLiked = true
+            itemList[i].likeCount += 1
+            if (e.currentTarget.dataset.type == "image") {
+              console.log("item", itemList)
+              that.setData({
+                imagesList: itemList
+              })
+            } else if (e.currentTarget.dataset.type == "video") {
+              that.setData({
+                videosList: itemList
+              })
+            }
           }
         }
       }

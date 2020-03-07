@@ -12,6 +12,7 @@ Page({
   data: {
     showVideoOnly: app.globalData.showVideoOnly,
 
+    inputContent: "",
 
     // 默认选中菜单
     currentTab: "1",
@@ -55,10 +56,6 @@ Page({
   bindFormSubmitVideos: function(e) {
     let that = this;
     if (that.data.upVideoArr.length != 0) {
-      console.log('图片路径', that.data.upVideoArr[0].tempFilePath)
-      console.log('文字', e.detail.value.textarea)
-      console.log('标签', that.data.navList[that.data.currentIndexNav])
-
 
       wx.showLoading({
         title: '发表中',
@@ -79,18 +76,31 @@ Page({
         },
 
         success: function(res) {
-          console.log('success', res)
+          wx.showModal({
+            title: '提示',
+            content: '视频上传已成功！请耐心等待，我们将在24小时内更新审核状态',
+            cancelText: '知道了',
+            confirmText: '去看看',
+            success(res) {
+              if (res.confirm) {
+                // 用户点击了确定属性的按钮，对应选择了'男'
+                wx.switchTab({
+                  url: '../../pages/my/my'
+                })
+              }
+            }
+          })
         },
         fail: function(res) {
-          wx.hideLoading()
+          wx.showModal({
+            title: '提示',
+            content: '视频上传失败！请重新发表',
+          })
         },
         complete: function(res) {
-          console.log("上传完成！")
           wx.hideLoading()
 
-          wx.switchTab({
-            url: '../../pages/my/my'
-          })
+
 
         }
       })
@@ -101,7 +111,9 @@ Page({
         console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
       })
 
+      e.detail.value.textarea = ""
       that.setData({
+        inputContent: "",
         upVideoArr: [], //存视频
         upVideoPathLen: 0,
         currentIndexNav: 0,
@@ -110,6 +122,17 @@ Page({
     }
 
   },
+
+
+
+  bindTextAreaChange: function(e) {
+    var that = this
+    var value = e.detail.value
+    that.setData({
+      inputContent: value,
+    })
+  },
+
 
   // 选择图片或者视频
   chooseFiles(e) {
@@ -169,15 +192,12 @@ Page({
     })
   },
 
-  // 初始化加载
-  onLoad: function(options) {
-    if (app.globalData.openId == '') {
-      this.getOpenId()
-    }
-    if (app.globalData.nickName == '' || app.globalData.avatarUrl == '') {
-      this.goLogin();
-    }
+  formReset: function() {
+    console.log('form发生了reset事件')
   },
+
+  // 初始化加载
+  onLoad: function(options) {},
 
   goLogin: function() {
     wx.navigateTo({
@@ -283,10 +303,8 @@ Page({
             } else {
               app.globalData.nickName = res.data.user.wxName
               app.globalData.avatarUrl = res.data.user.wxHeadUrl
-              // app.globalData.phoneNumber = res.data.user.phone
-              // app.globalData.isAdmin = res.data.user.isAdmin
-              app.globalData.phoneNumber = ''
-              app.globalData.isAdmin = true
+              app.globalData.phoneNumber = res.data.user.phone
+              app.globalData.isAdmin = res.data.user.isAdmin
             }
           }
         })

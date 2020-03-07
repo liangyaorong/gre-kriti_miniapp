@@ -84,7 +84,7 @@ var queryVideo = (
 
       if (res.data.length > 0) {
         that.setData({
-          videosList: that.data.videosList.concat(res.data),
+          videosList: that.data.videosList.slice(-5).concat(res.data),
           videoPage: page
         })
       }

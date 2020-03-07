@@ -29,7 +29,7 @@
 
 .navbar .item.active {
   border-bottom: 6rpx solid black;
-  color: black;
+  /* color: black; */
   font-size: 35rpx;
 }
 
@@ -50,10 +50,9 @@
   display: flex;
   height: 60rpx;
   /* padding: 10rpx; */
-  border: 5rpx solid black;
   border-radius: 5rpx;
   padding: 10rpx;
-
+  border: 5rpx solid black;
 }
 
 .nav_wrap_text {
@@ -68,14 +67,13 @@
 }
 
 .order_flag {
-    font-size: 25rpx;
+  font-size: 25rpx;
 }
-.order_flag.active{
+
+.order_flag.active {
   font-size: 28rpx;
   color: black;
 }
-
-
 
 .nav_wrap_text image {
   width: 20rpx;
@@ -97,9 +95,29 @@
   display: inline-block;
 }
 
-.nav_item.active {
+.nav_item.active0 {
   font-size: 30rpx;
   color: black;
+}
+
+.nav_item.active1 {
+  font-size: 30rpx;
+  color: mediumvioletred;
+}
+
+.nav_item.active2 {
+  font-size: 30rpx;
+  color: orange;
+}
+
+.nav_item.active3 {
+  font-size: 30rpx;
+  color: red;
+}
+
+.nav_item.active4 {
+  font-size: 30rpx;
+  color: purple;
 }
 
 /* 头图样式 */
@@ -118,8 +136,7 @@
 */
 
 .video_wrap {
-    width: 100%;
-
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   /* padding: 5rpx; */
@@ -140,20 +157,23 @@
 
 .video_img image {
   width: 100%;
-  height:500rpx;
+  height: 500rpx;
   /* margin: 5rpx; */
   border-radius: 0rpx;
+
 }
 
 swiper {
   width: 100%;
-  height:500rpx;
+  height: 500rpx;
   /* margin: 5rpx; */
 }
 
 .video_img video {
   width: 100%;
   height: 500rpx;
+      /* border: 5rpx solid black; */
+
 }
 
 .video_img .video_info {
@@ -168,7 +188,7 @@ swiper {
 }
 
 .video_title {
-  margin: 20rpx;
+  margin: 30rpx;
   font-size: 28rpx;
   display: -webkit-box;
   overflow: hidden;
@@ -180,7 +200,7 @@ swiper {
 }
 
 .other {
-  margin: 15rpx;
+  /* margin: 15rpx; */
   display: flex;
   justify-content: space-around;
   text-align: center;
@@ -210,25 +230,57 @@ swiper {
 
 .artist {
   /* border-top: 1rpx solid #ddd; */
-  padding-top: 15rpx;
-  padding-left: 25rpx;
+  padding-top: 30rpx;
+  padding-left: 30rpx;
   display: flex;
 }
 
 .artist image {
   display: block;
-  width: 68rpx;
-  height: 68rpx;
+  width: 80rpx;
+  height: 80rpx;
   float: right;
-  border-radius: 34px;
+  border-radius: 40rpx;
 }
 
 .text-box {
+  width: 65%;
+  height: 80rpx;
+  float: left;
   padding-left: 25rpx;
 }
 
+.text-box2 {
+  /* width: 30%; */
+  float: left;
+  font-size: 23rpx;
+  font-weight: lighter;
+  /* border: 10rpx solid black; */
+}
+
+.label1 {
+  height: 15rpx;
+  color: mediumvioletred;
+}
+
+.label2 {
+  height: 15rpx;
+  color: orange;
+}
+
+.label3 {
+  height: 15rpx;
+  color: red;
+}
+
+.label4 {
+  height: 15rpx;
+  color: purple;
+}
+
 .arow01 {
-  margin-bottom: 20rpx;
+  /* margin-bottom: 20rpx; */
+  height: 40rpx;
 }
 
 .arow {
@@ -239,15 +291,14 @@ swiper {
 
 .artist-name {
   width: 360rpx;
-  font-size: 30rpx;
-  font-weight: 700;
-  height: 15rpx;
-  color: #000;
+  font-size: 27rpx;
+  font-weight: bold;
+  color: black;
 }
 
 .time {
-  font-size: 25rpx;
-  color: #999;
+  font-size: 22rpx;
+  color: grey;
 }
 
 .search-bar {
@@ -321,4 +372,52 @@ swiper {
   font-size: 25rpx;
   color: #09bb07;
   white-space: nowrap;
+}
+
+.like_area {
+  /* width: 10%; */
+  float: left;
+  height: 50rpx;
+  padding: 10rpx 70rpx 10rpx 70rpx;
+}
+
+.like_area image {
+  width: 35rpx;
+  height: 35rpx;
+  float: left;
+}
+
+.like_area text {
+  width: 1rpx;
+  height: 35rpx;
+  text-align: left;
+  display: inline-block;
+  line-height: 35rpx;
+}
+
+.watch_area {
+  float: right;
+  height: 50rpx;
+  padding: 10rpx 70rpx 10rpx 70rpx;
+}
+
+.watch_area image {
+  width: 45rpx;
+  height: 35rpx;
+  float: left;
+}
+
+.watch_area text {
+  width: 1rpx;
+  height: 35rpx;
+  text-align: left;
+  line-height: 35rpx;
+}
+
+.text-color {
+  color: black;
+}
+
+.text-color.color1 {
+  color: purple;
 }

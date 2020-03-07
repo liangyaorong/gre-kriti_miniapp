@@ -33,12 +33,13 @@
     <view class='nav_wrap'>
       <!-- 自己滚动区域的组件 -->
       <scroll-view class='nav' scroll-x>
-        <view bindtap='activeNav' data-index="{{index}}" class='nav_item {{index===currentIndexNav?"active":""}}' wx:for="{{navList}}" wx:key="{{index}}">
+        <view bindtap='activeNav' data-index="{{index}}" class='nav_item {{index==currentIndexNav?"active"+index:""}}' wx:for="{{navList}}" wx:key="{{index}}">
           {{item}}
         </view>
       </scroll-view>
     </view>
     <button form-type="submit" class='submit'> 发表 </button>
+
   </form>
 
 
@@ -63,19 +64,20 @@
   <view class='add-btn' hidden="{{!upVideoFilesBtn}}" data-type="video" bindtap='chooseFiles'>
   </view>
 
-  <form bindsubmit="bindFormSubmitVideos">
-    <textarea class='desc' maxlength='50' style="height: 5em" placeholder="描述即将发表的作品" name="textarea" />
+  <form bindsubmit="bindFormSubmitVideos" >
+    <textarea class='desc' bindinput="bindTextAreaChange" value="{{inputContent}}" maxlength='50' style="height: 5em" placeholder="描述即将发表的作品" name="textarea" />
     <text class="tag-title">标签</text>
 
     <view class='nav_wrap'>
       <!-- 自己滚动区域的组件 -->
       <scroll-view class='nav' scroll-x>
-        <view bindtap='activeNav' data-index="{{index}}" class='nav_item {{index===currentIndexNav?"active":""}}' wx:for="{{navList}}" wx:key="{{index}}">
+        <view bindtap='activeNav' data-index="{{index}}" class='nav_item {{index==currentIndexNav?"active"+index:""}}' wx:for="{{navList}}" wx:key="{{index}}">
           {{item}}
         </view>
       </scroll-view>
     </view>
     <button form-type="submit" class='submit'> 发表 </button>
+
   </form>
 
 </view>

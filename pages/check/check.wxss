@@ -275,6 +275,7 @@ swiper {
   word-wrap: break-word;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  /* border: 5rpx solid black; */
 }
 
 .other {
@@ -310,9 +311,9 @@ swiper {
 
 .artist {
   /* border-top: 1rpx solid #ddd; */
-  padding-top: 15rpx;
-  padding-left: 25rpx;
-  display: flex;
+  /* padding-top: 15rpx; */
+  /* padding-left: 25rpx; */
+  /* display: flex; */
 }
 
 .artist image {
@@ -324,7 +325,7 @@ swiper {
 }
 
 .text-box {
-  padding-left: 25rpx;
+  /* padding-left: 25rpx; */
 }
 
 .arow01 {

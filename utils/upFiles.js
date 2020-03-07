@@ -46,37 +46,46 @@ var chooseVideo = (t, count) => {
     compressed: true,
     camera: 'back',
     success: function(res) {
-      let videoArr = t.data.upVideoArr || [];
-      let videoInfo = {};
-      videoInfo['tempFilePath'] = res.tempFilePath;
-      videoInfo['size'] = res.size;
-      videoInfo['height'] = res.height;
-      videoInfo['width'] = res.width;
-      videoInfo['thumbTempFilePath'] = res.thumbTempFilePath;
-      videoInfo['progress'] = 0;
-      videoArr.push(videoInfo)
-
-      if (videoArr.length >= count) {
-        // 超出部分截断
-        var newVideoArr = videoArr
-        if (videoArr.length > count) {
-          newVideoArr = videoArr.slice(0, count - 1)
-        }
-        t.setData({
-          upVideoFilesBtn: false,
-          upVideoArr: newVideoArr,
-          upVideoPathLen: newVideoArr.length
-
+      console.log("视频信息：", res)
+      if (res.duration > 30) {
+        wx.showModal({
+          title: '提示',
+          content: '视频时长超过上限，请控制在30秒内再尝试上传',
         })
-
       } else {
-        t.setData({
-          upVideoArr: videoArr,
-          upVideoPathLen: videoArr.length
+        let videoArr = t.data.upVideoArr || [];
+        let videoInfo = {};
+        videoInfo['tempFilePath'] = res.tempFilePath;
+        videoInfo['size'] = res.size;
+        videoInfo['height'] = res.height;
+        videoInfo['width'] = res.width;
+        videoInfo['thumbTempFilePath'] = res.thumbTempFilePath;
+        videoInfo['progress'] = 0;
+        videoArr.push(videoInfo)
 
-        })
+        if (videoArr.length >= count) {
+          // 超出部分截断
+          var newVideoArr = videoArr
+          if (videoArr.length > count) {
+            newVideoArr = videoArr.slice(0, count - 1)
+          }
+          t.setData({
+            upVideoFilesBtn: false,
+            upVideoArr: newVideoArr,
+            upVideoPathLen: newVideoArr.length
+
+          })
+
+        } else {
+          t.setData({
+            upVideoArr: videoArr,
+            upVideoPathLen: videoArr.length
+
+          })
+        }
+        console.log("当前视频路径列表：", videoArr)
       }
-      console.log("当前视频路径列表：", videoArr)
+
 
     }
   })
@@ -127,10 +136,16 @@ var multiPicSubmit = (that, openId, uploadIndex, post, dataTime) => {
     },
 
     success: function(res) {
-      console.log('success', res)
+      wx.showModal({
+        title: '提示',
+        content: '发表成功！',
+      })
     },
     fail: function(res) {
-      console.log('fail', res)
+      wx.showModal({
+        title: '提示',
+        content: '发表失败！请重新发表',
+      })
     },
     complete: function(res) {
       if (uploadIndex >= that.data.upImgArr.length - 1) {
